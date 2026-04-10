@@ -16,8 +16,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Playground: Story = {
-  render: () => (
-    <Accordion type="single" collapsible className="w-[360px]">
+  args: {
+    type: 'single',
+    collapsible: true,
+  },
+  render: (args) => (
+    <Accordion {...args} className="w-[360px]">
       <AccordionItem value="when-to-use">
         <AccordionTrigger>When to use?</AccordionTrigger>
         <AccordionContent>Use for progressive disclosure and support information.</AccordionContent>

@@ -8,9 +8,25 @@ type SheetStoryArgs = {
   description: string
 }
 
+function SheetStory({ title, description }: SheetStoryArgs) {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="secondary">Open sheet</Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>{title}</SheetTitle>
+          <SheetDescription>{description}</SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
 const meta = {
   title: 'Overlays/Sheet',
-  component: Sheet,
+  component: SheetStory,
   tags: ['test'],
   args: {
     title: 'Drawer title',
@@ -24,23 +40,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Sheet expõe contexto lateral sem remover totalmente a tela base.' } },
   },
-} satisfies Meta<SheetStoryArgs>
+} satisfies Meta<typeof SheetStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ title, description }) => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="secondary">Open sheet</Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>{title}</SheetTitle>
-          <SheetDescription>{description}</SheetDescription>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
-  ),
-}
+export const Playground: Story = {}

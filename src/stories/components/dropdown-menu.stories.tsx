@@ -10,9 +10,22 @@ type DropdownStoryArgs = {
   onSelect: ReturnType<typeof fn>
 }
 
+function DropdownMenuStory({ triggerLabel, itemLabel, onSelect }: DropdownStoryArgs) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>{triggerLabel}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onSelect={onSelect}>{itemLabel}</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
 const meta = {
   title: 'Overlays/Dropdown Menu',
-  component: DropdownMenu,
+  component: DropdownMenuStory,
   tags: ['test'],
   args: {
     triggerLabel: 'Open menu',
@@ -27,35 +40,14 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Dropdown menu reúne ações compactas próximas ao gatilho.' } },
   },
-} satisfies Meta<DropdownStoryArgs>
+} satisfies Meta<typeof DropdownMenuStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ triggerLabel, itemLabel, onSelect }) => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button>{triggerLabel}</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem onSelect={onSelect}>{itemLabel}</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ),
-}
+export const Playground: Story = {}
 
 export const Interaction: Story = {
-  render: ({ triggerLabel, itemLabel, onSelect }) => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button>{triggerLabel}</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem onSelect={onSelect}>{itemLabel}</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ),
   play: async ({ canvas, userEvent, args }) => {
     const trigger = canvas.getByRole('button', { name: args.triggerLabel })
     await userEvent.tab()
