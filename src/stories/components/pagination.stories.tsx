@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type PaginationStoryArgs = {
   currentPage: 1 | 2 | 3
@@ -19,7 +20,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Paginação renderizada sozinha, com página ativa controlável.' } },
+    docs: { description: { component: <StoryDocsDescription story="pagination" /> } },
   },
 } satisfies Meta<typeof PaginationExample>
 

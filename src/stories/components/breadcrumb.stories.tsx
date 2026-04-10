@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type BreadcrumbStoryArgs = {
   workspaceLabel: string
@@ -44,7 +45,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Breadcrumb aparece isolado com labels configuráveis via args.' } },
+    docs: { description: { component: <StoryDocsDescription story="breadcrumb" /> } },
   },
 } satisfies Meta<typeof BreadcrumbStory>
 

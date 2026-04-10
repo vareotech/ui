@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { Switch } from '@/components/ui/switch'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Switch',
@@ -19,7 +20,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Switch para toggles on/off imediatos.' } },
+    docs: { description: { component: <StoryDocsDescription story="switch" /> } },
   },
 } satisfies Meta<typeof Switch>
 

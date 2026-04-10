@@ -3,6 +3,7 @@ import { expect, fn, within } from 'storybook/test'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type DropdownStoryArgs = {
   triggerLabel: string
@@ -38,7 +39,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Dropdown menu reúne ações compactas próximas ao gatilho.' } },
+    docs: { description: { component: <StoryDocsDescription story="dropdown-menu" /> } },
   },
 } satisfies Meta<typeof DropdownMenuStory>
 

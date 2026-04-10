@@ -1,51 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './toast.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Toast
-
-Toast confirms outcomes briefly without blocking the interface.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use for lightweight success or error feedback after an action.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Success | Confirms completion. |
-| Error | Signals a failed outcome. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep the message concise.
-
-### Don'ts
-
-- Don't put long instructions inside a toast.
-
-## Usage
-
-```jsx
-toast.success('Saved successfully')
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="toast" stories={Stories} />

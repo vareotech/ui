@@ -1,71 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as BreadcrumbStories from './breadcrumb.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './breadcrumb.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={BreadcrumbStories} />
+<Meta of={Stories} />
 
-# Breadcrumb
-
-Breadcrumb shows the current location and reduces ambiguity in deep flows, garantindo clareza e ritmo mesmo quando o usuário avança em camadas.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Anatomy](#anatomy)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- When a nested path should be surfaced with a clear trail and heading.
-- When you need to pair the navigation path with global actions separated visually.
-- When the active item must feel distinct to avoid accidental navigation.
-
-## Anatomy
-
-| Part | Purpose |
-| --- | --- |
-| Breadcrumb | Wrapper that groups the entire trail and keeps semantics clear. |
-| BreadcrumbList | Layout container for ordered steps with list semantics. |
-| BreadcrumbItem | Each step, optionally linked and separated to hint depth. |
-| BreadcrumbLink | Interactive step leading to ancestor screens and sections. |
-| BreadcrumbSeparator | Decorative guidance marker between steps for pacing. |
-| BreadcrumbPage | Current, non-interactive item that anchors context. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep the last item as plain text to signal the current screen.
-- Pair the trail with a heading so users read location and intent together.
-
-### Don'ts
-
-- Don't overload the breadcrumb with unrelated actions or controls.
-- Don't omit separators when multiple levels exist.
-
-## Usage
-
-```jsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/apps">Apps</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbPage>Settings</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
-
-## Props
-
-<ArgTypes of={BreadcrumbStories} />
+<ComponentDoc componentKey="breadcrumb" stories={Stories} />

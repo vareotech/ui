@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { Textarea } from '@/components/ui/textarea'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Textarea',
@@ -25,7 +26,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Textarea para conteúdo livre. O canvas mostra apenas o campo com controls básicos.' } },
+    docs: { description: { component: <StoryDocsDescription story="textarea" /> } },
   },
 } satisfies Meta<typeof Textarea>
 

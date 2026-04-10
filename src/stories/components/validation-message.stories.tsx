@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { ValidationMessage } from '@/components/ui/validation-message'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Validation Message',
@@ -16,7 +17,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Validation message comunica erro ou sucesso próximo ao campo.' } },
+    docs: { description: { component: <StoryDocsDescription story="validation-message" /> } },
   },
 } satisfies Meta<typeof ValidationMessage>
 

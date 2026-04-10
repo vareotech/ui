@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type CardStoryArgs = {
   title: string
@@ -38,7 +39,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Card base renderizado sozinho no canvas, com conteúdo controlado por args.' } },
+    docs: { description: { component: <StoryDocsDescription story="card" /> } },
   },
 } satisfies Meta<typeof CardStory>
 

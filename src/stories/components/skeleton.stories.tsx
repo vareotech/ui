@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Skeleton } from '@/components/ui/skeleton'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Feedback/Skeleton',
@@ -8,7 +9,7 @@ const meta = {
   tags: ['test'],
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Skeleton preserva ritmo visual antes do conteúdo final carregar.' } },
+    docs: { description: { component: <StoryDocsDescription story="skeleton" /> } },
   },
 } satisfies Meta<typeof Skeleton>
 

@@ -1,58 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as InputStories from './input.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './input.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={InputStories} />
+<Meta of={Stories} />
 
-# Input
-
-Input is the base text field for search, registration, and filtros, always paired with a visible label for acessibilidade.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Capture single-line text such as nomes, emails, or termos de busca.
-- Combine with helper text and validation messaging for clarity.
-- Reinforce context by grouping fields with related labels.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Default | Standard editable state for user input. |
-| Readonly | Surface data without allowing edits. |
-| Disabled | Indicate an action is not available. |
-| Invalid | Highlight errors via invalid state and messaging. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Always use visible labels to describe each field.
-- Group related fields by context, alinhando verticalmente se necessário.
-- Provide helper text and validation messages próximos ao input.
-
-### Don'ts
-
-- Don't hide the label or rely only on placeholder text.
-- Do not overload a single input with too many responsibilities.
-
-## Usage
-
-```jsx
-<Input label="Nome" helperText="Use o nome completo" />
-```
-
-## Props
-
-<ArgTypes of={InputStories} />
+<ComponentDoc componentKey="input" stories={Stories} />

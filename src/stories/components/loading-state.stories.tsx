@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { LoadingState } from '@/components/ui/loading-state'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Feedback/Loading State',
@@ -16,7 +17,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Loading State informa que o sistema ainda está processando ou buscando dados.' } },
+    docs: { description: { component: <StoryDocsDescription story="loading-state" /> } },
   },
 } satisfies Meta<typeof LoadingState>
 

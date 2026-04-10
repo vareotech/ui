@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { Input } from '@/components/ui/input'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
+import { useStorybookI18n } from '@/stories/i18n'
 
 const meta = {
   title: 'Forms/Input',
@@ -9,12 +11,10 @@ const meta = {
   tags: ['test'],
   args: {
     type: 'text',
-    placeholder: 'Workspace name',
     defaultValue: '',
     disabled: false,
     readOnly: false,
     'aria-invalid': false,
-    'aria-label': 'Workspace name',
     onChange: fn(),
   },
   argTypes: {
@@ -27,7 +27,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Campo textual base para busca, cadastro e filtros. O canvas expõe apenas o input com controls.' } },
+    docs: { description: { component: <StoryDocsDescription story="input" /> } },
   },
 } satisfies Meta<typeof Input>
 
@@ -35,7 +35,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Playground: Story = {
-  render: (args) => <Input className="w-[320px]" {...args} />,
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.input
+    const { placeholder, 'aria-label': ariaLabel, ...rest } = args
+
+    return (
+      <Input
+        className="w-[320px]"
+        {...rest}
+        placeholder={placeholder ?? content.defaultPlaceholder}
+        aria-label={ariaLabel ?? content.defaultAriaLabel}
+      />
+    )
+  },
 }
 
 export const Invalid: Story = {
@@ -46,13 +59,22 @@ export const Invalid: Story = {
 }
 
 export const TypingInteraction: Story = {
-  args: {
-    'aria-label': 'Search field',
-    placeholder: 'Search',
+  args: {},
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.input
+    const { placeholder, 'aria-label': ariaLabel, ...rest } = args
+
+    return (
+      <Input
+        {...rest}
+        placeholder={placeholder ?? content.searchPlaceholder}
+        aria-label={ariaLabel ?? content.searchAriaLabel}
+      />
+    )
   },
-  render: (args) => <Input {...args} />,
   play: async ({ canvas, userEvent, args }) => {
-    const input = canvas.getByRole('textbox', { name: 'Search field' })
+    const input = canvas.getByRole('textbox')
     await userEvent.type(input, 'vareo')
     await expect(input).toHaveValue('vareo')
     await expect(args.onChange).toHaveBeenCalled()

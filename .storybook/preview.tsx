@@ -6,6 +6,9 @@ import { create } from 'storybook/theming/create'
 
 import '@/index.css'
 import { Toaster } from '@/components/ui/toaster'
+import { StorybookI18nProvider, getPreferredLocale } from '@/stories/i18n'
+import { enUS } from '@/stories/i18n/locales/en-US'
+import { ptBR } from '@/stories/i18n/locales/pt-BR'
 
 function ThemeFrame({ theme, children, centered = false }: { theme: string; children: ReactNode; centered?: boolean }) {
   const isLight = theme === 'light'
@@ -72,32 +75,54 @@ const createDocsTheme = (mode: 'dark' | 'light') => create({
 
 const darkDocsTheme = createDocsTheme('dark')
 const lightDocsTheme = createDocsTheme('light')
+const defaultLocale = getPreferredLocale()
+const localeMeta = {
+  'en-US': enUS.meta,
+  'pt-BR': ptBR.meta,
+}
+const defaultMeta = localeMeta[defaultLocale]
 
 const preview: Preview = {
   globalTypes: {
-    theme: {
-      description: 'Theme mode for components',
+    locale: {
+      description: defaultMeta.localeLabel,
       toolbar: {
-        title: 'Theme',
+        title: defaultMeta.localeLabel,
+        icon: 'globe',
+        items: [
+          { value: 'en-US', title: enUS.meta.localeEnglish },
+          { value: 'pt-BR', title: ptBR.meta.localePortuguese },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    theme: {
+      description: defaultMeta.themeLabel,
+      toolbar: {
+        title: defaultMeta.themeLabel,
         icon: 'paintbrush',
         items: [
-          { value: 'dark', title: 'Dark', icon: 'moon' },
-          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: defaultMeta.themeDark, icon: 'moon' },
+          { value: 'light', title: defaultMeta.themeLight, icon: 'sun' },
         ],
         dynamicTitle: true,
       },
     },
   },
   initialGlobals: {
+    locale: defaultLocale,
     theme: 'dark',
   },
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme || 'dark'
+      const locale = context.globals.locale || defaultLocale
       return (
-        <ThemeFrame theme={theme} centered>
-          <Story />
-        </ThemeFrame>
+        <StorybookI18nProvider locale={locale}>
+          <ThemeFrame theme={theme} centered>
+            <Story />
+          </ThemeFrame>
+        </StorybookI18nProvider>
       )
     },
   ],
@@ -120,14 +145,17 @@ const preview: Preview = {
     docs: {
       container: ({ children, context }) => {
         const mode = context?.store?.userGlobals?.globals?.theme === 'light' || context?.globals?.theme === 'light' ? 'light' : 'dark'
+        const locale = context?.store?.userGlobals?.globals?.locale ?? context?.globals?.locale ?? defaultLocale
         const theme = mode === 'light' ? lightDocsTheme : darkDocsTheme
 
         return (
-          <ThemeFrame theme={mode}>
-            <DocsContainer context={context} theme={theme}>
-              {children}
-            </DocsContainer>
-          </ThemeFrame>
+          <StorybookI18nProvider locale={locale}>
+            <ThemeFrame theme={mode}>
+              <DocsContainer context={context} theme={theme}>
+                {children}
+              </DocsContainer>
+            </ThemeFrame>
+          </StorybookI18nProvider>
         )
       },
       story: {

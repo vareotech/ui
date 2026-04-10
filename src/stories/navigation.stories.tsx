@@ -5,7 +5,9 @@ import { Footer } from '@/components/ui/footer'
 import { Header } from '@/components/ui/header'
 import { SideNavigation } from '@/components/ui/side-navigation'
 import { TopNavigation } from '@/components/ui/top-navigation'
-import { componentGuidelines } from '@/stories/docs/component-guidelines'
+import { useComponentGuidelines } from '@/stories/docs/component-guidelines'
+import { useStorybookI18n } from '@/stories/i18n'
+import { enUS } from '@/stories/i18n/locales/en-US'
 
 const meta = {
   title: 'Navigation/Showcase',
@@ -14,8 +16,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          'Header, top navigation, side navigation e footer para fornecer orientação, contexto e navegação previsível em produtos administrativos.',
+        component: enUS.docs.stories.navigation.docsDescription,
       },
     },
   },
@@ -24,36 +25,44 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Overview: Story = {
-  render: () => (
+function NavigationShowcase() {
+  const { messages } = useStorybookI18n()
+  const componentGuidelines = useComponentGuidelines()
+  const content = messages.docs.stories.navigation
+
+  return (
     <div className="story-shell space-y-5">
       <TopNavigation
         brand="Vareo"
         items={[
-          { label: 'Dashboard', href: '#', active: true },
-          { label: 'Pedidos', href: '#' },
-          { label: 'Configurações', href: '#' },
+          { label: content.dashboard, href: '#', active: true },
+          { label: content.orders, href: '#' },
+          { label: content.settings, href: '#' },
         ]}
-        actions={<Button variant="secondary">Nova ação</Button>}
+        actions={<Button variant="secondary">{content.newAction}</Button>}
       />
 
       <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
         <SideNavigation
-          title="Workspace"
+          title={content.workspace}
           items={[
-            { section: 'Core', label: 'Dashboard', active: true, href: '#' },
-            { label: 'Operação', href: '#' },
-            { label: 'Financeiro', href: '#' },
-            { section: 'Config', label: 'Permissões', href: '#' },
-            { label: 'Integrações', href: '#' },
+            { section: content.core, label: content.dashboard, active: true, href: '#' },
+            { label: content.operations, href: '#' },
+            { label: content.finance, href: '#' },
+            { section: content.config, label: content.permissions, href: '#' },
+            { label: content.integrations, href: '#' },
           ]}
           footer={<div className="text-sm text-muted-foreground">{componentGuidelines.navigation.purpose}</div>}
         />
         <div className="space-y-4">
-          <Header title="Header de página" description="Use para consolidar breadcrumb, contexto atual e ação dominante." breadcrumb={['Operação', 'Pedidos']} actions={<><Button variant="secondary">Filtrar</Button><Button>Exportar</Button></>} />
-          <Footer>O footer deve ser discreto, estável e útil para contexto institucional ou links de apoio.</Footer>
+          <Header title={content.pageHeader} description={content.pageHeaderDescription} breadcrumb={[content.operations, content.orders]} actions={<><Button variant="secondary">{content.filter}</Button><Button>{content.export}</Button></>} />
+          <Footer>{content.footer}</Footer>
         </div>
       </div>
     </div>
-  ),
+  )
+}
+
+export const Overview: Story = {
+  render: () => <NavigationShowcase />,
 }

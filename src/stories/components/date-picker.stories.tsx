@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { DatePicker } from '@/components/ui/date-picker'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Date Picker',
@@ -23,7 +24,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Entrada de data discreta para filtros, agendamento e marcos operacionais.' } },
+    docs: { description: { component: <StoryDocsDescription story="date-picker" /> } },
   },
 } satisfies Meta<typeof DatePicker>
 

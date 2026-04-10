@@ -1,50 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './label.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Label
-
-Label names a field clearly and anchors form meaning.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use on every form control that requires an explicit name.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Default | Standard field label. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep labels concise and descriptive.
-
-### Don'ts
-
-- Don't rely only on placeholder as label.
-
-## Usage
-
-```jsx
-<Label htmlFor="email">Email</Label>
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="label" stories={Stories} />

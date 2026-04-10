@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type TooltipStoryArgs = {
   triggerLabel: string
@@ -35,7 +36,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Tooltip explica affordances rapidamente em hover ou foco.' } },
+    docs: { description: { component: <StoryDocsDescription story="tooltip" /> } },
   },
 } satisfies Meta<typeof TooltipStory>
 

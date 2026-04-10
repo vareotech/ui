@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Label } from '@/components/ui/label'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Label',
@@ -14,7 +15,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Label define o nome do campo de forma semântica e consistente.' } },
+    docs: { description: { component: <StoryDocsDescription story="label" /> } },
   },
 } satisfies Meta<typeof Label>
 

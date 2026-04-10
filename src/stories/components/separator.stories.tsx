@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Separator } from '@/components/ui/separator'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Separator',
@@ -8,7 +9,7 @@ const meta = {
   tags: ['test'],
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Separator organiza blocos longos de conteúdo ou formulário.' } },
+    docs: { description: { component: <StoryDocsDescription story="separator" /> } },
   },
 } satisfies Meta<typeof Separator>
 

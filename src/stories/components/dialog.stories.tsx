@@ -3,6 +3,7 @@ import { expect, within } from 'storybook/test'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type DialogStoryArgs = {
   triggerLabel: string
@@ -46,7 +47,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Dialog protege foco e prioriza decisões pontuais.' } },
+    docs: { description: { component: <StoryDocsDescription story="dialog" /> } },
   },
 } satisfies Meta<typeof DialogStory>
 

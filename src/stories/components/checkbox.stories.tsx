@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { Checkbox } from '@/components/ui/checkbox'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Checkbox',
@@ -19,7 +20,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Checkbox para seleção múltipla e confirmação explícita.' } },
+    docs: { description: { component: <StoryDocsDescription story="checkbox" /> } },
   },
 } satisfies Meta<typeof Checkbox>
 

@@ -1,74 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as TableStories from './table.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './table.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={TableStories} />
+<Meta of={Stories} />
 
-# Table
-
-Dense comparison surface for operational data and análises rápidas.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Show recurring analytical tasks or KPIs side by side.
-- Render operational listings where rows correspond to registros concretos.
-- Compare metrics with dense layout e indicadores visuais. 
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Table | Base container for rows and columns with overflow handling. |
-| TableHeader | Wraps the cabeçalho para denotar column names. |
-| TableBody | Groups rows of dados reais. |
-| TableRow | Represents a linha única, highlighting state se necessário. |
-| TableHead | Cell for headings with emphasis e alinhamento. |
-| TableCell | Body cell used for conteúdo textual ou numérico. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Align numeric values consistently para facilitar leitura.
-- Use header labels that descrevem claramente o metric.  
-- Limit row density when data becomes difícil de distinguir.  
-
-### Don'ts
-
-- Don't rely solely on color for meaning; add icons or text.
-- Avoid using tables for storytelling content; prefira cards ou listas.
-- Do not overload each row with too many columns sem justificar. 
-
-## Usage
-
-```jsx
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Team</TableHead>
-      <TableHead>Status</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>Growth</TableCell>
-      <TableCell>Operational</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
-
-## Props
-
-<ArgTypes of={TableStories} />
+<ComponentDoc componentKey="table" stories={Stories} />

@@ -1,71 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as PaginationStories from './pagination.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './pagination.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={PaginationStories} />
+<Meta of={Stories} />
 
-# Pagination
-
-Pagination keeps listings manageable when data flows beyond a single viewport and mantém o ritmo do usuário em listagens extensas.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- When page navigation needs to clearly surface position for large datasets.
-- When a sense of progress through pages improves confidence e evita perda de contexto.
-- When you can show both previous/next affordances and direct page links without crowding.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Pagination | Root that defines the navigation region. |
-| PaginationContent | Structural wrapper keeping spacing consistent. |
-| PaginationItem | Numeric or control item, accessible and focusable. |
-| PaginationLink | Actual link that receives `isActive` to highlight the current page. |
-| PaginationPrevious | Link to the previous page, disabled at the start. |
-| PaginationNext | Link to the next page, disabled at the end. |
-| PaginationEllipsis | Placeholder when pages collapse to save space. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Highlight the current page with `isActive` so it reads like a progress marker.
-- Provide ellipsis when there are too many pages to prevent crowding.
-
-### Don'ts
-
-- Don't rely on pagination when infinite scroll already suits the data rhythm.
-- Don't replace navigation with dots unless they also support keyboard focus.
-
-## Usage
-
-```jsx
-<Pagination>
-  <PaginationPrevious href="/reports?page=1">Previous</PaginationPrevious>
-  <PaginationItem>
-    <PaginationLink href="/reports?page=1">1</PaginationLink>
-  </PaginationItem>
-  <PaginationItem>
-    <PaginationLink href="/reports?page=2" isActive>
-      2
-    </PaginationLink>
-  </PaginationItem>
-  <PaginationNext href="/reports?page=3">Next</PaginationNext>
-</Pagination>
-```
-
-## Props
-
-<ArgTypes of={PaginationStories} />
+<ComponentDoc componentKey="pagination" stories={Stories} />

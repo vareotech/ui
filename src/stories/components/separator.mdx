@@ -1,50 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './separator.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Separator
-
-Separator introduces visual rhythm between related sections.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use to break long forms or grouped information.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Horizontal | Separates stacked sections. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Use when spacing alone is not enough.
-
-### Don'ts
-
-- Don't stack many separators close together.
-
-## Usage
-
-```jsx
-<Separator />
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="separator" stories={Stories} />

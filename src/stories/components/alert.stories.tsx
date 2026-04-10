@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type AlertStoryArgs = {
   variant: 'default' | 'info' | 'success' | 'warning' | 'destructive'
@@ -35,7 +36,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Alert renderizado sozinho, com variant e conteúdo controlados pelo painel.' } },
+    docs: { description: { component: <StoryDocsDescription story="alert" /> } },
   },
 } satisfies Meta<typeof AlertStory>
 

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
+import { useStorybookI18n } from '@/stories/i18n'
 
 type AvatarStoryArgs = {
   src: string
@@ -30,8 +32,6 @@ const meta = {
   tags: ['test'],
   args: {
     src: '',
-    alt: 'Vareo avatar',
-    fallback: 'VT',
     size: 'md',
   },
   argTypes: {
@@ -42,11 +42,23 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Avatar isolado com fallback e imagem configuráveis via args.' } },
+    docs: { description: { component: <StoryDocsDescription story="avatar" /> } },
   },
 } satisfies Meta<typeof AvatarStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {}
+export const Playground: Story = {
+  args: {
+    alt: '',
+    fallback: '',
+  },
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.avatar
+    const { alt, fallback, ...rest } = args
+
+    return <AvatarStory {...rest} alt={alt ?? content.alt} fallback={fallback ?? content.fallback} />
+  },
+}

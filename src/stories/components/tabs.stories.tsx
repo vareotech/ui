@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn } from 'storybook/test'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type TabsStoryArgs = {
   defaultValue: 'overview' | 'data'
@@ -21,7 +22,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Tabs organizam painéis equivalentes com troca visível de contexto.' } },
+    docs: { description: { component: <StoryDocsDescription story="tabs" /> } },
   },
 } satisfies Meta<TabsStoryArgs>
 

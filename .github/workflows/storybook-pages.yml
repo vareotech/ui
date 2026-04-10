@@ -28,7 +28,7 @@ concurrency:
 jobs:
   deploy:
     environment:
-      name: github-pages
+      name: '@vareo/design-system'
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 

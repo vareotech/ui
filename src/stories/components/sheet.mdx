@@ -1,52 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './sheet.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Sheet
-
-Sheet reveals supplemental detail while keeping the main context visible.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use when users still need the underlying page context.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Right sheet | Supplemental task or detail panel. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep the content task-oriented and contextual.
-
-### Don'ts
-
-- Don't use sheet when full modal isolation is required.
-
-## Usage
-
-```jsx
-<Sheet>
-  <SheetTrigger>Open details</SheetTrigger>
-</Sheet>
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="sheet" stories={Stories} />

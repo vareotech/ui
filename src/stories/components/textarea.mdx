@@ -1,57 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as TextareaStories from './textarea.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './textarea.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={TextareaStories} />
+<Meta of={Stories} />
 
-# Textarea
-
-Textarea is designed for long-form text, operational comments, and free-content fields, oferecendo resize control para confort.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Collect extended descriptions, notas de operação, or feedback.
-- Allow users to resize when more space is needed.
-- Validate content and show messaging near the textarea.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Default | Normal multi-line editing mode. |
-| Placeholder | Hint for expected content. |
-| Validation | Flags errors with visual indication. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Provide context via placeholder and helper text.
-- Allow natural resizing to accommodate more texto.
-- Surface validation lessons with clear messaging.
-
-### Don'ts
-
-- Don't rely on a single-line field when content is verbose.
-- Avoid disabling resize unless necessary for layout control.
-
-## Usage
-
-```jsx
-<Textarea label="Observações" placeholder="Descreva o caso detalhadamente" />
-```
-
-## Props
-
-<ArgTypes of={TextareaStories} />
+<ComponentDoc componentKey="textarea" stories={Stories} />

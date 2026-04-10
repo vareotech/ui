@@ -1,54 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './badge.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Badge
-
-Badge surfaces short status and metadata in dense interfaces.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use to mark status, category, or compact metadata.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Primary | Main highlighted status. |
-| Secondary | Lower emphasis metadata. |
-| Success | Positive state. |
-| Warning | Cautionary state. |
-| Destructive | Critical state. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep badge labels short.
-
-### Don'ts
-
-- Don't use badge for long sentences.
-
-## Usage
-
-```jsx
-<Badge variant="success">Synced</Badge>
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="badge" stories={Stories} />

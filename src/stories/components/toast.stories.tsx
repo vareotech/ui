@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/toast'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type ToastStoryArgs = {
   triggerLabel: string
@@ -41,7 +42,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Toast comunica resultados temporários sem interromper o fluxo.' } },
+    docs: { description: { component: <StoryDocsDescription story="toast" /> } },
   },
 } satisfies Meta<typeof ToastStory>
 

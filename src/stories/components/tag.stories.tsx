@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Tag } from '@/components/ui/tag'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Data Display/Tag',
@@ -16,7 +17,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Tag representa atributos ou filtros compactos, com opção de remoção visual.' } },
+    docs: { description: { component: <StoryDocsDescription story="tag" /> } },
   },
 } satisfies Meta<typeof Tag>
 

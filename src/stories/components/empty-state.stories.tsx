@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { EmptyState } from '@/components/ui/empty-state'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type EmptyStateArgs = {
   title: string
@@ -24,7 +25,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Empty State orienta a próxima ação quando ainda não há conteúdo.' } },
+    docs: { description: { component: <StoryDocsDescription story="empty-state" /> } },
   },
 } satisfies Meta<EmptyStateArgs>
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { HelperText } from '@/components/ui/helper-text'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Forms/Helper Text',
@@ -14,7 +15,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Helper text adiciona contexto útil abaixo do campo.' } },
+    docs: { description: { component: <StoryDocsDescription story="helper-text" /> } },
   },
 } satisfies Meta<typeof HelperText>
 

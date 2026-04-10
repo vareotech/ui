@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const rows = [
   ['TEN-01', 'Retail Prime', 'Active'],
@@ -15,7 +16,7 @@ const meta = {
   tags: ['test'],
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Tabela renderizada sozinha com dataset mínimo e escaneável.' } },
+    docs: { description: { component: <StoryDocsDescription story="table" /> } },
   },
 } satisfies Meta<typeof Table>
 

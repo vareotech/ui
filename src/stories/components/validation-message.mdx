@@ -1,51 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import * as Stories from './validation-message.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
 <Meta of={Stories} />
 
-# Validation Message
-
-Validation Message clarifies success or error directly where the user needs it.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Use after validation or submission feedback.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| Error | Explains what must be corrected. |
-| Success | Confirms valid state. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Place it near the affected control.
-
-### Don'ts
-
-- Don't show validation feedback too early.
-
-## Usage
-
-```jsx
-<ValidationMessage tone="error">Email inválido</ValidationMessage>
-```
-
-## Props
-
-<ArgTypes of={Stories} />
+<ComponentDoc componentKey="validation-message" stories={Stories} />

@@ -1,63 +1,7 @@
-import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
-import * as SelectStories from './select.stories'
+import { Meta } from '@storybook/addon-docs/blocks'
+import * as Stories from './select.stories'
+import { ComponentDoc } from '@/stories/docs/component-doc'
 
-<Meta of={SelectStories} />
+<Meta of={Stories} />
 
-# Select
-
-Select orchestrates controlled choices with accessible focus, composed of trigger, valor, content, and items to keep interactions consistentes.
-
----
-
-## Table of Contents
-
-1. [When to use](#when-to-use)
-2. [Variants](#variants)
-3. [Do's and Don'ts](#dos-and-donts)
-4. [Usage](#usage)
-5. [Props](#props)
-
----
-
-## When to use
-
-- Let users choose a single option from a predefined lista.
-- Surface focus states and ensure keyboard navigation stays previsível.
-- Flag errors with aria-invalid when selection is required.
-
-## Variants
-
-| Variant | Purpose |
-| --- | --- |
-| SelectTrigger | Opens the dropdown region. |
-| SelectValue | Displays the chosen option. |
-| SelectContent | Wraps the list of SelectItem. |
-| SelectItem | Represents each option with focus feedback. |
-
-## Do's and Don'ts
-
-### Do's
-
-- Keep Select controlled and sync value with the form state.
-- Preserve consistent focus order for accessibility.
-- Apply aria-invalid to communicate errors.
-
-### Don'ts
-
-- Avoid mixing multiple select patterns on the same row.
-- Don't hide the selected state; always show the current value.
-
-## Usage
-
-```jsx
-<Select aria-invalid={hasError}>
-  <SelectTrigger />
-  <SelectContent>
-    <SelectItem value="1">Option 1</SelectItem>
-  </SelectContent>
-</Select>
-```
-
-## Props
-
-<ArgTypes of={SelectStories} />
+<ComponentDoc componentKey="select" stories={Stories} />

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, fn, within } from 'storybook/test'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type SelectStoryArgs = {
   label: string
@@ -33,7 +34,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Select com trigger e lista compacta. O canvas isola o controle com args previsíveis.' } },
+    docs: { description: { component: <StoryDocsDescription story="select" /> } },
   },
 } satisfies Meta<typeof SelectExample>
 

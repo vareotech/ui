@@ -3,13 +3,14 @@ import { MoreHorizontal, Plus } from 'lucide-react'
 import { expect, fn } from 'storybook/test'
 
 import { Button, IconButton } from '@/components/ui/button'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
+import { useStorybookI18n } from '@/stories/i18n'
 
 const meta = {
   title: 'Forms/Button',
   component: Button,
   tags: ['test'],
   args: {
-    children: 'Primary action',
     variant: 'primary',
     size: 'md',
     disabled: false,
@@ -27,7 +28,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Botões comunicam prioridade, ação e risco. O canvas mostra o componente isolado com controls e action log.',
+        component: <StoryDocsDescription story="actions" />,
       },
     },
   },
@@ -37,13 +38,24 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Playground: Story = {
-  render: (args) => <Button {...args} />,
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.actions
+    const { children, ...rest } = args
+
+    return <Button {...rest}>{children ?? content.primaryAction}</Button>
+  },
 }
 
 export const Destructive: Story = {
   args: {
-    children: 'Delete item',
     variant: 'destructive',
+  },
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.actions
+
+    return <Button {...args}>{content.deleteItem}</Button>
   },
 }
 
@@ -51,26 +63,45 @@ export const IconOnly: Story = {
   args: {
     variant: 'ghost',
   },
-  render: (args) => (
-    <IconButton {...args} aria-label="More actions">
-      <MoreHorizontal />
-    </IconButton>
-  ),
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.actions
+    const { 'aria-label': ariaLabel, ...rest } = args
+
+    return (
+      <IconButton {...rest} aria-label={ariaLabel ?? content.moreActions}>
+        <MoreHorizontal />
+      </IconButton>
+    )
+  },
 }
 
 export const WithLeadingIcon: Story = {
-  render: (args) => (
-    <Button {...args}>
-      <Plus />
-      {args.children}
-    </Button>
-  ),
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.actions
+    const { children, ...rest } = args
+
+    return (
+      <Button {...rest}>
+        <Plus />
+        {children ?? content.primaryAction}
+      </Button>
+    )
+  },
 }
 
 export const Interaction: Story = {
-  args: { children: 'Run action' },
+  args: { variant: 'primary' },
+  render: (args) => {
+    const { messages } = useStorybookI18n()
+    const content = messages.docs.stories.actions
+    const { children, ...rest } = args
+
+    return <Button {...rest}>{children ?? content.interactionAction}</Button>
+  },
   play: async ({ canvas, userEvent, args }) => {
-    const button = canvas.getByRole('button', { name: 'Run action' })
+    const button = canvas.getByRole('button')
     await userEvent.tab()
     await expect(button).toHaveFocus()
     await userEvent.click(button)

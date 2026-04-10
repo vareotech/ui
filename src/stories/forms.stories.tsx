@@ -14,7 +14,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { ValidationMessage } from '@/components/ui/validation-message'
-import { componentGuidelines } from '@/stories/docs/component-guidelines'
+import { useComponentGuidelines } from '@/stories/docs/component-guidelines'
+import { useStorybookI18n } from '@/stories/i18n'
+import { enUS } from '@/stories/i18n/locales/en-US'
 
 const meta = {
   title: 'Forms/Form Showcase',
@@ -23,8 +25,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          'Campos, seleção e wrappers de formulário do Vareo DS. Use labels explícitas, helper text curto e feedback de validação contextual.',
+        component: enUS.docs.stories.forms.docsDescription,
       },
     },
   },
@@ -34,6 +35,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 function FormShowcase() {
+  const { messages, t } = useStorybookI18n()
+  const componentGuidelines = useComponentGuidelines()
+  const content = messages.docs.stories.forms
+  const planOptions = content.planOptions
   const form = useForm({
     defaultValues: {
       company: 'Vareo Commerce',
@@ -50,8 +55,8 @@ function FormShowcase() {
     <div className="story-shell space-y-6">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <div className="story-kicker">Components / Forms</div>
-          <h2 className="story-title mt-2">Campos com contexto, validação e estados reais</h2>
+          <div className="story-kicker">{content.kicker}</div>
+          <h2 className="story-title mt-2">{content.title}</h2>
           <p className="story-subtitle mt-2 max-w-3xl">{componentGuidelines.field.purpose}</p>
         </div>
       </div>
@@ -59,7 +64,7 @@ function FormShowcase() {
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <Card className="border-white/10 bg-[rgba(19,26,37,0.92)]">
           <CardHeader>
-            <CardTitle>Overview</CardTitle>
+            <CardTitle>{t('ui.overview')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -69,86 +74,86 @@ function FormShowcase() {
                   name="company"
                   render={({ field }) => (
                     <FormItem className="md:col-span-2">
-                      <FormLabel>Nome da conta</FormLabel>
+                      <FormLabel>{content.accountName}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormDescription>Use o nome operacional visível em tabelas, filtros e detalhes.</FormDescription>
+                      <FormDescription>{content.accountNameDescription}</FormDescription>
                     </FormItem>
                   )}
                 />
                 <FormItem>
-                  <FormLabel htmlFor="default-input">Input padrão</FormLabel>
-                  <Input id="default-input" placeholder="Workspace principal" />
-                  <HelperText>Labels continuam visíveis mesmo com conteúdo vazio.</HelperText>
+                  <FormLabel htmlFor="default-input">{content.defaultInput}</FormLabel>
+                  <Input id="default-input" placeholder={content.defaultInputPlaceholder} />
+                  <HelperText>{content.defaultInputHelp}</HelperText>
                 </FormItem>
                 <FormItem>
-                  <FormLabel htmlFor="date-field">Date picker</FormLabel>
+                  <FormLabel htmlFor="date-field">{content.datePicker}</FormLabel>
                   <DatePicker id="date-field" defaultValue="2026-04-03" />
-                  <HelperText>Use para datas pontuais e previsíveis.</HelperText>
+                  <HelperText>{content.datePickerHelp}</HelperText>
                 </FormItem>
                 <FormField
                   control={form.control}
                   name="segment"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Segmento</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{content.segment}</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="retail">Retail</SelectItem>
-                          <SelectItem value="saas">SaaS</SelectItem>
-                          <SelectItem value="services">Services</SelectItem>
+                          <SelectItem value="retail">{content.retail}</SelectItem>
+                          <SelectItem value="saas">{content.saas}</SelectItem>
+                          <SelectItem value="services">{content.services}</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormItem>
                   )}
                 />
                 <FormItem>
-                  <FormLabel htmlFor="readonly">Readonly</FormLabel>
-                  <Input id="readonly" readOnly value="Plano enterprise" />
-                  <HelperText>Use quando o valor for importante mas não editável neste contexto.</HelperText>
+                  <FormLabel htmlFor="readonly">{content.readonly}</FormLabel>
+                  <Input id="readonly" readOnly value={content.readonlyValue} />
+                  <HelperText>{content.readonlyHelp}</HelperText>
                 </FormItem>
                 <FormItem className="md:col-span-2">
-                  <FormLabel htmlFor="long-content">Conteúdo longo</FormLabel>
-                  <Textarea id="long-content" defaultValue="Descrição extensa de contexto operacional, integração com ERP, observações de rollout e dependências de negócio." />
+                  <FormLabel htmlFor="long-content">{content.longContent}</FormLabel>
+                  <Textarea id="long-content" defaultValue={content.longContentValue} />
                 </FormItem>
                 <div className="space-y-3 md:col-span-2">
                   <div className="grid gap-3 md:grid-cols-2">
                     <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-black/10 p-4 text-sm text-foreground">
                       <Checkbox defaultChecked />
-                      Ativar sincronização automática de catálogos durante a madrugada.
+                      {content.catalogSync}
                     </label>
                     <div className="rounded-xl border border-white/10 bg-black/10 p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <div className="text-sm font-medium text-foreground">Alertas operacionais</div>
-                          <p className="m-0 text-sm leading-6 text-muted-foreground">Feedback imediato para filas críticas.</p>
+                          <div className="text-sm font-medium text-foreground">{content.operationalAlerts}</div>
+                          <p className="m-0 text-sm leading-6 text-muted-foreground">{content.operationalAlertsHelp}</p>
                         </div>
-                        <Switch defaultChecked aria-label="Alertas operacionais" />
+                        <Switch defaultChecked aria-label={content.operationalAlerts} />
                       </div>
                     </div>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-black/10 p-4">
-                    <div className="mb-3 text-sm font-medium text-foreground">Radio group</div>
+                    <div className="mb-3 text-sm font-medium text-foreground">{content.radioGroup}</div>
                     <RadioGroup defaultValue="growth" className="grid gap-3 md:grid-cols-3">
-                      {['starter', 'growth', 'enterprise'].map((option) => (
-                        <label key={option} className="flex items-center gap-3 rounded-xl border border-white/10 bg-surface-muted/70 p-3 text-sm text-foreground">
-                          <RadioGroupItem value={option} />
-                          {option}
+                      {planOptions.map(({ value, label }) => (
+                        <label key={value} className="flex items-center gap-3 rounded-xl border border-white/10 bg-surface-muted/70 p-3 text-sm text-foreground">
+                          <RadioGroupItem value={value} />
+                          {label}
                         </label>
                       ))}
                     </RadioGroup>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-3 md:col-span-2">
-                  <Button>Salvar alterações</Button>
-                  <Button variant="secondary">Salvar rascunho</Button>
-                  <Button variant="outline">Cancelar</Button>
+                  <Button>{content.saveChanges}</Button>
+                  <Button variant="secondary">{content.saveDraft}</Button>
+                  <Button variant="outline">{content.cancel}</Button>
                 </div>
               </form>
             </Form>
@@ -157,25 +162,25 @@ function FormShowcase() {
 
         <Card className="border-white/10 bg-[rgba(19,26,37,0.92)]">
           <CardHeader>
-            <CardTitle>Estados e boas práticas</CardTitle>
+            <CardTitle>{content.statesAndPractices}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-xl border border-white/10 bg-black/10 p-4">
-              <div className="mb-3 text-sm font-medium text-foreground">Validation message</div>
-              <ValidationMessage>Revise o CNPJ: formato inválido para cadastro fiscal.</ValidationMessage>
+              <div className="mb-3 text-sm font-medium text-foreground">{content.validationMessageLabel}</div>
+              <ValidationMessage>{content.validationMessage}</ValidationMessage>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/10 p-4">
-              <div className="mb-3 text-sm font-medium text-foreground">Success message</div>
-              <ValidationMessage tone="success">Dados validados e prontos para publicação.</ValidationMessage>
+              <div className="mb-3 text-sm font-medium text-foreground">{content.successMessageLabel}</div>
+              <ValidationMessage tone="success">{content.successMessage}</ValidationMessage>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/10 p-4">
-              <div className="mb-3 text-sm font-medium text-foreground">Do</div>
+              <div className="mb-3 text-sm font-medium text-foreground">{t('ui.doLabel')}</div>
               <ul className="m-0 space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
                 {componentGuidelines.field.do.map((item) => <li key={item}>{item}</li>)}
               </ul>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/10 p-4">
-              <div className="mb-3 text-sm font-medium text-foreground">Anti patterns</div>
+              <div className="mb-3 text-sm font-medium text-foreground">{t('ui.antiPatterns')}</div>
               <ul className="m-0 space-y-2 pl-5 text-sm leading-7 text-muted-foreground">
                 {componentGuidelines.field.dont.map((item) => <li key={item}>{item}</li>)}
               </ul>
@@ -187,23 +192,29 @@ function FormShowcase() {
   )
 }
 
-export const Overview: Story = { render: () => <FormShowcase /> }
+function ValidationStatesShowcase() {
+  const { messages } = useStorybookI18n()
 
-export const ValidationStates: Story = {
-  render: () => (
+  return (
     <div className="story-shell">
       <div className="preview-frame preview-grid md:grid-cols-2">
         <div className="space-y-3">
-          <Label htmlFor="error-field">Error</Label>
+          <Label htmlFor="error-field">{messages.docs.stories.forms.errorLabel}</Label>
           <Input id="error-field" aria-invalid value="abc" readOnly />
-          <ValidationMessage>Use um identificador válido com 14 dígitos.</ValidationMessage>
+          <ValidationMessage>{messages.docs.stories.forms.invalidIdentifier}</ValidationMessage>
         </div>
         <div className="space-y-3">
-          <Label htmlFor="success-field">Success</Label>
+          <Label htmlFor="success-field">{messages.docs.stories.forms.successLabel}</Label>
           <Input id="success-field" value="52.132.443/0001-09" readOnly />
-          <ValidationMessage tone="success">Documento validado com sucesso.</ValidationMessage>
+          <ValidationMessage tone="success">{messages.docs.stories.forms.successIdentifier}</ValidationMessage>
         </div>
       </div>
     </div>
-  ),
+  )
+}
+
+export const Overview: Story = { render: () => <FormShowcase /> }
+
+export const ValidationStates: Story = {
+  render: () => <ValidationStatesShowcase />,
 }

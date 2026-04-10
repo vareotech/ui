@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { enUS } from '@/stories/i18n/locales/en-US'
+
 import { ConfirmationTemplate } from '@/templates/confirmation-template'
 import { DashboardTemplate } from '@/templates/dashboard-template'
 import { DetailTemplate } from '@/templates/detail-template'
@@ -21,8 +23,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          'Padrões de página para login, dashboard, listagem, cadastro, detalhe, processo e estados de confirmação. Todos usam apenas componentes do Vareo DS.',
+        component: (enUS.docs as unknown as { templates: { docsDescription: string } }).templates.docsDescription,
       },
     },
   },

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 type SheetStoryArgs = {
   title: string
@@ -38,7 +39,7 @@ const meta = {
   },
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Sheet expõe contexto lateral sem remover totalmente a tela base.' } },
+    docs: { description: { component: <StoryDocsDescription story="sheet" /> } },
   },
 } satisfies Meta<typeof SheetStory>
 

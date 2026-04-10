@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 
 const meta = {
   title: 'Data Display/Accordion',
@@ -8,7 +9,7 @@ const meta = {
   tags: ['test'],
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Accordion revela conteúdo progressivamente em listas verticais.' } },
+    docs: { description: { component: <StoryDocsDescription story="accordion" /> } },
   },
 } satisfies Meta<typeof Accordion>
 
