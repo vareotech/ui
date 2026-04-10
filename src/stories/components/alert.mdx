@@ -1,0 +1,60 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as AlertStories from './alert.stories'
+
+<Meta of={AlertStories} />
+
+# Alert
+
+Alert surfaces contextual messages that call attention to risk, progress ou informação importante de forma consistente.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- When you must highlight a warning, success, or informational note relative to the current screen.
+- When contextual guidance should stay persistent until the user acts or dismisses it.
+- When a short message needs hierarchy via `AlertTitle` e `AlertDescription`.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| default | Neutral tone for general guidance and mild notices. |
+| info | Subtle emphasis for informational updates or system states. |
+| success | Affirmative feedback after successful actions. |
+| destructive | Calls out errors, failures or urgent problems that need attention. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Use `AlertTitle` to keep the headline scannable and `AlertDescription` for details.
+- Match the tone (`info`, `success`, `destructive`) with the actual state to reduce confusion.
+
+### Don'ts
+
+- Don't hide alerts that signal failure behind other components.
+- Don't mix conflicting tones inside the same alert (for example, `destructive` text with `success` styling).
+
+## Usage
+
+```jsx
+<Alert variant="success">
+  <AlertTitle>Payment captured</AlertTitle>
+  <AlertDescription>The user's card was billed and receipt emailed.</AlertDescription>
+</Alert>
+```
+
+## Props
+
+<ArgTypes of={AlertStories} />

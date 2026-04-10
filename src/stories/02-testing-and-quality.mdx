@@ -1,0 +1,104 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Docs/Testing & Quality" />
+
+# Testing & Quality
+
+O Storybook é a fonte de verdade do design system. Além de documentar, ele valida interação, foco, conteúdo acessível e cobertura das stories críticas.
+
+---
+
+## Neste documento
+
+- [Pilares de qualidade](#pilares-de-qualidade)
+- [Cobertura por componente](#cobertura-por-componente)
+- [Comandos de teste](#comandos-de-teste)
+- [Padrão de play function](#padrão-de-play-function)
+- [Convenções de teste](#convenções-de-teste)
+
+---
+
+## Pilares de qualidade
+
+O sistema valida qualidade em três dimensões:
+
+### Play functions
+
+Simulam foco, clique, digitação, abertura de overlays e alternância de estados. Cada play function roda como teste automatizado dentro do Storybook via `addon-vitest`.
+
+### Accessibility (a11y)
+
+O `addon-a11y` integra o axe-core para detectar regressões de acessibilidade em cada story. ARIA roles, foco, contraste e screen reader são validados continuamente.
+
+### Coverage
+
+Cobertura gerada pelo Vitest addon com base nas stories testadas. O objetivo é que cada componente com interação tenha pelo menos uma play function validando o fluxo crítico.
+
+---
+
+## Cobertura por componente
+
+| Componente | Categoria | Stories | Play function | Status |
+| --- | --- | --- | --- | --- |
+| Button | Actions | 3 | ✓ | tested |
+| Input | Forms | 2 | ✓ | tested |
+| Select | Forms | 2 | ✓ | tested |
+| Textarea | Forms | 2 | ✓ | tested |
+| DatePicker | Forms | 2 | ✓ | tested |
+| Choice Controls | Forms | 2 | ✓ | tested |
+| Dialog & Drawer | Overlays | 2 | ✓ | tested |
+| Tooltip/Dropdown/Toast | Overlays | 2 | ✓ | tested |
+| Tabs & Accordion | Data Display | 2 | ✓ | tested |
+| Pagination | Navigation | 2 | ✓ | tested |
+| Alert | Feedback | 1 | — | partial |
+| Table | Data Display | 1 | — | planned |
+| Avatar | Data Display | 1 | — | planned |
+| Badge & Tag | Data Display | 1 | — | planned |
+| Card | Layout | 1 | — | planned |
+| Breadcrumb | Navigation | 1 | — | planned |
+| Empty/Loading/Skeleton | Feedback | 1 | — | planned |
+| Helpers | Forms | 1 | — | planned |
+
+---
+
+## Comandos de teste
+
+```bash
+# Roda todos os testes de componente com play functions
+npm run test-storybook
+
+# Watch mode para desenvolvimento iterativo de stories
+npm run test-storybook:watch
+
+# Gera relatório de cobertura via Vitest addon
+npm run test-storybook:coverage
+```
+
+---
+
+## Padrão de play function
+
+```tsx
+export const Interaction: Story = {
+  args: { children: 'Run action' },
+  play: async ({ canvas, userEvent, args }) => {
+    const button = canvas.getByRole('button', {
+      name: 'Run action',
+    })
+    await userEvent.tab()
+    await expect(button).toHaveFocus()
+    await userEvent.click(button)
+    await expect(args.onClick).toHaveBeenCalled()
+  },
+}
+```
+
+---
+
+## Convenções de teste
+
+- Use `canvas` para queries dentro da story.
+- Use `userEvent` para simular interação real.
+- Adicione `tags: ['test']` no meta para rodar no CI.
+- Sempre teste foco, clique e estados finais visíveis.
+- Nomeie stories de teste com sufixo `Interaction` (ex.: `ButtonInteraction`, `SelectOpenInteraction`).

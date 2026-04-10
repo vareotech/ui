@@ -1,0 +1,61 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as AvatarStories from './avatar.stories'
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+Short visual identifiers for users e squads, mantendo contexto e propriedade em interfaces densas.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Show ownership of a task, ticket, ou nota com um rosto reconhecível.
+- Pair with contextual meta to convey responsabilidade quickly.
+- Display fallback initials quando a imagem não está disponível. 
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Avatar | Circle frame that scales via custom className para o layout. |
+| AvatarFallback | Renders initials or icon when image fails to load. |
+| AvatarImage | Loads remote photo with fallback behavior automatically. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Supply meaningful `alt` text when using AvatarImage.
+- Keep sizes consistentes com tokens de espaçamento da interface.
+- Use fallback letters thoughtfully para manter riconhecimento. 
+
+### Don'ts
+
+- Don't rely on avatars alone to communicate status; add labels.
+- Avoid stretching the image area; match aspect ratio to layout.
+- Don’t mix initials and icons in the same slot without reason. 
+
+## Usage
+
+```jsx
+<Avatar className="w-10 h-10">
+  <AvatarImage src="/photos/ana.jpg" alt="Ana Souza" />
+  <AvatarFallback>AS</AvatarFallback>
+</Avatar>
+```
+
+## Props
+
+<ArgTypes of={AvatarStories} />

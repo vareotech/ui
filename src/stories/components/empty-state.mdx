@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './empty-state.stories'
+
+<Meta of={Stories} />
+
+# Empty State
+
+Empty State explains absence and suggests the next useful action.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use when data is missing but the interface remains healthy.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Explains why the page is empty and what to do next. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Offer a clear next action.
+
+### Don'ts
+
+- Don't leave the area blank without context.
+
+## Usage
+
+```jsx
+<EmptyState title="No orders yet" actionLabel="Create order" />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

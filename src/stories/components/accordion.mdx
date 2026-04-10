@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './accordion.stories'
+
+<Meta of={Stories} />
+
+# Accordion
+
+Accordion expands and collapses content progressively inside a vertical flow.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for optional detail and progressive disclosure.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Single | Opens one item at a time. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Use clear trigger labels.
+
+### Don'ts
+
+- Don't hide essential primary content by default.
+
+## Usage
+
+```jsx
+<Accordion type="single" collapsible />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

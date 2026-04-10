@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './skeleton.stories'
+
+<Meta of={Stories} />
+
+# Skeleton
+
+Skeleton hints the final layout before real content is ready.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use to reduce layout jumps during loading.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Neutral placeholder block. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Match skeleton shape to the incoming layout.
+
+### Don'ts
+
+- Don't combine skeleton with already-loaded final content in the same slot.
+
+## Usage
+
+```jsx
+<Skeleton className="h-10 w-full" />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

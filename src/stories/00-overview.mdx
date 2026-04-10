@@ -1,0 +1,84 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Docs/Overview" />
+
+# Vareo Design System
+
+Dark-first, modular e pronto para produto real. O Vareo DS é o sistema de componentes compartilhados da vareo.tech — projetado para acelerar produtos internos sem abrir mão de consistência visual e operacional.
+
+---
+
+## Neste documento
+
+- [O que este sistema resolve](#o-que-este-sistema-resolve)
+- [Princípios](#princípios)
+- [Camadas da V1](#camadas-da-v1)
+- [Responsividade e acessibilidade](#responsividade-e-acessibilidade)
+- [Boas práticas](#boas-práticas)
+
+---
+
+## O que este sistema resolve
+
+O Vareo DS existe para resolver três problemas recorrentes em times de produto:
+
+- **Consistência entre contextos.** A mesma linguagem visual funciona em dashboards, institucional, marketing e mobile sem parecer um conjunto solto.
+- **Velocidade com manutenção simples.** Componentes previsíveis, tokens semânticos e decisões visuais centralizadas na base aceleram entrega sem dívida técnica.
+- **Contrato visual compartilhado.** Designers, devs e produto falam a mesma linguagem usando tokens, variantes e stories como documentação viva.
+
+---
+
+## Princípios
+
+Quatro regras seguram a coerência do sistema:
+
+1. Tokens semânticos antes de decisões visuais pontuais.
+2. Baixo ruído visual, contraste seguro e hierarquia clara.
+3. Componentes reutilizáveis com APIs pequenas e previsíveis.
+4. Storybook como fonte viva de documentação e alinhamento.
+
+---
+
+## Camadas da V1
+
+O sistema está organizado em três camadas:
+
+| Camada | Descrição |
+| --- | --- |
+| **Foundations** | Tipografia, espaçamento, radius, sombras, foco, estados e motion discreta. |
+| **Components** | Primitives reutilizáveis com variantes consistentes para produto e marketing. |
+| **Templates** | Exemplos reais para validar o sistema em cenários da vareo.tech. |
+
+Use o painel lateral do Storybook para navegar cada camada.
+
+---
+
+## Responsividade e acessibilidade
+
+### Responsividade
+
+- Mobile first com breakpoints semânticos.
+- Grid de 12 colunas para composição previsível.
+- Ritmo vertical baseado em spacing consistente.
+
+### Acessibilidade
+
+- Foco visível com ring semântico.
+- Contraste claro para textos e ações.
+- Base construída sobre primitives acessíveis (Radix UI).
+
+---
+
+## Boas práticas
+
+### Do
+
+- Use superfície, borda e espaçamento para criar hierarquia.
+- Reserve `primary` para ações de maior valor.
+- Prefira texto curto, claro e contextual nas ações.
+
+### Don't
+
+- Não use várias cores de destaque ao mesmo tempo.
+- Não combine sombras pesadas com bordas chamativas.
+- Não esconda estados de foco ou feedback de erro.

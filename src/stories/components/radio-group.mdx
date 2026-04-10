@@ -1,0 +1,52 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './radio-group.stories'
+
+<Meta of={Stories} />
+
+# Radio Group
+
+Radio Group supports a single choice inside a defined set of options.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use when exactly one option should remain selected.
+- Use for mutually exclusive plans, modes, or filters.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Single selection among peers. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep all options visible together.
+- Order choices logically.
+
+### Don'ts
+
+- Don't use radio group for multi-select behavior.
+
+## Usage
+
+```jsx
+<RadioGroup defaultValue="growth" />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

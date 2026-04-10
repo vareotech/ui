@@ -1,0 +1,53 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './switch.stories'
+
+<Meta of={Stories} />
+
+# Switch
+
+Switch communicates an immediate on/off state for a single setting.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for a binary preference that can be changed instantly.
+- Use when the current state must stay visible at all times.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Standard on/off toggle. |
+| Disabled | Prevents interaction while preserving context. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Pair with a clear nearby label.
+- Use for immediate state changes.
+
+### Don'ts
+
+- Don't use switch for submit-driven settings.
+
+## Usage
+
+```jsx
+<Switch aria-label="Enable alerts" defaultChecked />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

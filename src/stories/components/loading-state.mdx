@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './loading-state.stories'
+
+<Meta of={Stories} />
+
+# Loading State
+
+Loading State reassures users while work is still in progress.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use when async work is in progress and the page needs a clear waiting state.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Short loading message with spinner. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep the message calm and brief.
+
+### Don'ts
+
+- Don't imply failure while content is still loading.
+
+## Usage
+
+```jsx
+<LoadingState description="Fetching dashboard..." />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

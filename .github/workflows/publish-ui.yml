@@ -1,0 +1,66 @@
+name: Publish UI Package
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@vareotech'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library
+        run: npm run build
+
+      - name: Set dynamic version for main branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          npm version 0.0.0-snapshot-${GITHUB_SHA::7} --no-git-tag-version
+
+      - name: Publish to GitHub Packages
+        run: |
+          if [[ "${{ github.ref }}" == refs/heads/main ]]; then
+            npm publish --registry https://npm.pkg.github.com --tag latest
+          else
+            npm publish --registry https://npm.pkg.github.com
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js for npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npm
+        run: |
+          if [[ "${{ github.ref }}" == refs/heads/main ]]; then
+            npm publish --registry https://registry.npmjs.org --access public --tag latest
+          else
+            npm publish --registry https://registry.npmjs.org --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

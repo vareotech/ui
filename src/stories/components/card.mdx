@@ -1,0 +1,70 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as CardStories from './card.stories'
+
+<Meta of={CardStories} />
+
+# Card
+
+Structural base for blocks de contexto, agrupamento e leitura rápida em dashboards.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Group related dados ou controles dentro de um painel claro.
+- Serve as anchor points em dashboards e settings com foco em quick insights.
+- Highlight summaries while mantendo alinhamento com visual system.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Card | Surface container com padding e background neutro. |
+| CardHeader | Top section for titles ou call-to-action. |
+| CardTitle | Large heading que resume o bloco. |
+| CardDescription | Support text com contexto adicional ao título. |
+| CardContent | Body where principais elementos são renderizados. |
+| CardFooter | Bottom area para ações secundárias ou tight meta. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep cards predictable em height e spacing.
+- Use header e footer para manter hierarquia clara.
+- Apply subtle dividers or background overlays when multiple cards align. 
+
+### Don'ts
+
+- Don't overload a card with múltiplos CTAs conflicting visually.
+- Avoid non-aligned content que quebra grid visual.
+- Do not nest cards unnecessarily; prefer stacking simples. 
+
+## Usage
+
+```jsx
+<Card>
+  <CardHeader>
+    <CardTitle>Dashboard</CardTitle>
+    <CardDescription>Current month summaries</CardDescription>
+  </CardHeader>
+  <CardContent>Metrics here...</CardContent>
+  <CardFooter>
+    <Button variant="ghost">View details</Button>
+  </CardFooter>
+</Card>
+```
+
+## Props
+
+<ArgTypes of={CardStories} />

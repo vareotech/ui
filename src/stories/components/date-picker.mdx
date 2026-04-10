@@ -1,0 +1,57 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as DatePickerStories from './date-picker.stories'
+
+<Meta of={DatePickerStories} />
+
+# DatePicker
+
+DatePicker exposes a discrete date input for filters, scheduling, and marcos operacionais with native behaviors and aria-invalid support.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Set precise dates for filtros, entregas, and compromissos.
+- Lock input to readonly when the date should not change.
+- Flag errors with aria-invalid when validation fails.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Editable date field with calendar picker. |
+| Readonly | Display date without allowing edits. |
+| Error | Communicate invalid range or missing value. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Use the native date picker affordance for consistency.
+- Provide helper text when date ranges matter.
+- Respect readonly mode when data should be preserved.
+
+### Don'ts
+
+- Don't replace the native control with a custom date wheel unnecessarily.
+- Avoid allowing inconsistent formats by keeping the native input.
+
+## Usage
+
+```jsx
+<DatePicker label="Entrega" aria-invalid={isInvalid} />
+```
+
+## Props
+
+<ArgTypes of={DatePickerStories} />

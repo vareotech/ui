@@ -1,0 +1,53 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './checkbox.stories'
+
+<Meta of={Stories} />
+
+# Checkbox
+
+Checkbox supports multiple selection and explicit opt-in states.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use when users can select zero, one, or many options.
+- Use for explicit consent or optional settings.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Standard binary selection. |
+| Disabled | Shows unavailable selection. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep labels short and specific.
+- Use checkbox only for independent choices.
+
+### Don'ts
+
+- Don't use checkbox when only one option can be chosen.
+
+## Usage
+
+```jsx
+<Checkbox aria-label="Enable reports" defaultChecked />
+```
+
+## Props
+
+<ArgTypes of={Stories} />

@@ -1,0 +1,51 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './tag.stories'
+
+<Meta of={Stories} />
+
+# Tag
+
+Tag groups small attributes and removable filters in a compact chip format.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for categories, selected filters, or compact labels.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Standard chip label. |
+| Removable | Displays removal affordance. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Use removable tags when users can clear a filter.
+
+### Don'ts
+
+- Don't overload tags with full sentence content.
+
+## Usage
+
+```jsx
+<Tag removable>Release 1.2</Tag>
+```
+
+## Props
+
+<ArgTypes of={Stories} />

@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './tooltip.stories'
+
+<Meta of={Stories} />
+
+# Tooltip
+
+Tooltip provides short contextual help close to the trigger.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for brief clarifications that should not occupy layout space.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Hover/focus contextual hint. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep content brief.
+
+### Don'ts
+
+- Don't place essential instructions only inside tooltip.
+
+## Usage
+
+```jsx
+<TooltipContent>Contextual help</TooltipContent>
+```
+
+## Props
+
+<ArgTypes of={Stories} />

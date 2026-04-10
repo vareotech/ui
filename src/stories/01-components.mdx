@@ -1,0 +1,110 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Docs/Components" />
+
+# Component Catalog
+
+Every component in the Vareo DS acts as a product contract — purpose, anatomy, states, interaction, correct usage and anti-patterns. Use the sidebar to navigate directly to each component, or browse the categories below.
+
+Each component now has a **Docs tab** (prose documentation) and visual **Stories** for interactive exploration.
+
+---
+
+## In this document
+
+- [Page structure](#page-structure)
+- [Forms](#forms)
+- [Data Display](#data-display)
+- [Layout](#layout)
+- [Navigation](#navigation)
+- [Feedback](#feedback)
+- [Overlays](#overlays)
+
+---
+
+## Page structure
+
+Each component page follows this structure:
+
+1. **Docs tab** — When to use, variants, Do's/Don'ts, usage examples and props reference.
+2. **Overview story** — Visual anatomy with live components.
+3. **Interaction stories** — Play functions testing focus, click, typing, opening.
+4. **A11y** — Accessibility violations checked automatically on every test run.
+
+---
+
+## Forms
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Button](?path=/story/forms-button--playground) | Communicates priority, action and risk. | 5 | ✓ |
+| [Input](?path=/story/forms-input--playground) | Base text field for search, registration and filters. | 3 | ✓ |
+| [Select](?path=/story/forms-select--playground) | Controlled choice with compact content and clear reading. | 3 | ✓ |
+| [Textarea](?path=/story/forms-textarea--playground) | Long text field with resize and validation support. | 3 | ✓ |
+| [Date Picker](?path=/story/forms-date-picker--playground) | Discrete date selection for filters and scheduling. | 3 | ✓ |
+| [Checkbox](?path=/story/forms-checkbox--playground) | Independent binary or multi-select control. | 2 | ✓ |
+| [Radio Group](?path=/story/forms-radio-group--playground) | Exclusive selection within a small set. | 2 | ✓ |
+| [Switch](?path=/story/forms-switch--playground) | Immediate on/off setting toggle. | 2 | ✓ |
+| [Label](?path=/story/forms-label--playground) | Field naming and semantic association. | 1 | — |
+| [Helper Text](?path=/story/forms-helper-text--playground) | Supporting guidance below the field. | 1 | — |
+| [Validation Message](?path=/story/forms-validation-message--playground) | Error or success feedback near the field. | 1 | — |
+| [Separator](?path=/story/forms-separator--playground) | Divides long sections into readable groups. | 1 | — |
+
+---
+
+## Data Display
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Table](?path=/story/data-display-table--playground) | Dense comparison and scannable reading. | 1 | — |
+| [Avatar](?path=/story/data-display-avatar--playground) | Short visual identification for users and ownership. | 1 | — |
+| [Badge](?path=/story/data-display-badge--playground) | Short statuses and metadata. | 1 | — |
+| [Tag](?path=/story/data-display-tag--playground) | Compact removable or static labels. | 1 | — |
+| [Tabs](?path=/story/data-display-tabs--playground) | Visible switching between peer panels. | 2 | ✓ |
+| [Accordion](?path=/story/data-display-accordion--playground) | Progressive disclosure in a vertical flow. | 1 | — |
+
+---
+
+## Layout
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Card](?path=/story/layout-card--playground) | Structural base for grouped content blocks. | 1 | — |
+
+---
+
+## Navigation
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Breadcrumb](?path=/story/navigation-breadcrumb--playground) | Location context and hierarchical navigation. | 1 | — |
+| [Pagination](?path=/story/navigation-pagination--playground) | Page navigation with accessible focus and visible active state. | 2 | ✓ |
+
+---
+
+## Feedback
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Alert](?path=/story/feedback-alert--playground) | Contextual messages for risk, progress or important information. | 1 | — |
+| [Empty State](?path=/story/feedback-empty-state--playground) | Explains absence and suggests a next step. | 1 | — |
+| [Loading State](?path=/story/feedback-loading-state--playground) | Indicates work in progress with calm feedback. | 1 | — |
+| [Skeleton](?path=/story/feedback-skeleton--playground) | Preserves layout rhythm while content loads. | 1 | — |
+
+---
+
+## Overlays
+
+| Component | Description | Stories | Tests |
+| --- | --- | --- | --- |
+| [Dialog](?path=/story/overlays-dialog--playground) | Focused decision layer with trapped focus. | 2 | ✓ |
+| [Sheet](?path=/story/overlays-sheet--playground) | Side panel that preserves background context. | 1 | — |
+| [Tooltip](?path=/story/overlays-tooltip--playground) | Short contextual help close to the trigger. | 1 | — |
+| [Dropdown Menu](?path=/story/overlays-dropdown-menu--playground) | Compact action list near the trigger. | 2 | ✓ |
+| [Toast](?path=/story/overlays-toast--playground) | Temporary success or error notification. | 1 | — |
+
+---
+
+## Summary
+
+The Vareo DS catalog now points to **individual component entries**, each with its own prose docs page and isolated stories for canvas, controls and interactions.
