@@ -1,0 +1,62 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './button.stories'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Button communicates priority, action, and risco in interfaces where clarity matters, garantindo ações claras.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Highlight the dominant action that deserves immediate attention.
+- Provide clear alternatives with secondary or outline styles in action groups.
+- Surface important statuses (loading, destructive confirmation) to guide interactions.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Primary | Main call to action, high priority closes flows. |
+| Secondary | Supporting action without the same weight. |
+| Outline | Lightweight action inside dense toolbars. |
+| Ghost | Transparent action for subtle interactions. |
+| Destructive | Alerts for actions with real risk, como exclusão. |
+| Icon (IconButton) | Compact trigger for single-icon actions. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Use primary for the dominant action in each block.
+- Show loading state immediately when the action is processing.
+- Combine sizes consistently; match textual hierarchy.
+
+### Don'ts
+
+- Do not use destructive styles unless there is real risk.
+- Don't mix many sizes in the same action row to avoid visual noise.
+
+## Usage
+
+```jsx
+<Button variant="primary" size="md" loading>
+  Confirmar
+</Button>
+```
+
+## Props
+
+<ArgTypes of={ButtonStories} />

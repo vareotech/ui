@@ -1,0 +1,52 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './dropdown-menu.stories'
+
+<Meta of={Stories} />
+
+# Dropdown Menu
+
+Dropdown Menu exposes secondary actions without increasing layout noise.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for compact contextual actions.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Opens an action list near the trigger. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep labels task-oriented and scannable.
+
+### Don'ts
+
+- Don't hide the primary action only inside a dropdown.
+
+## Usage
+
+```jsx
+<DropdownMenu>
+  <DropdownMenuTrigger>Actions</DropdownMenuTrigger>
+</DropdownMenu>
+```
+
+## Props
+
+<ArgTypes of={Stories} />

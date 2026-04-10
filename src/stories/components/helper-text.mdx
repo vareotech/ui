@@ -1,0 +1,50 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './helper-text.stories'
+
+<Meta of={Stories} />
+
+# Helper Text
+
+Helper Text gives supporting instructions without overpowering the field.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use for non-obvious constraints or guidance.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Secondary instructional copy. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep helper text concise and practical.
+
+### Don'ts
+
+- Don't repeat the label or placeholder.
+
+## Usage
+
+```jsx
+<HelperText>Use a public-facing company name.</HelperText>
+```
+
+## Props
+
+<ArgTypes of={Stories} />

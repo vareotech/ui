@@ -1,0 +1,52 @@
+import { Meta, ArgTypes } from '@storybook/addon-docs/blocks'
+import * as Stories from './dialog.stories'
+
+<Meta of={Stories} />
+
+# Dialog
+
+Dialog creates a focused layer for high-priority decisions.
+
+---
+
+## Table of Contents
+
+1. [When to use](#when-to-use)
+2. [Variants](#variants)
+3. [Do's and Don'ts](#dos-and-donts)
+4. [Usage](#usage)
+5. [Props](#props)
+
+---
+
+## When to use
+
+- Use when users must confirm or review a focused task.
+
+## Variants
+
+| Variant | Purpose |
+| --- | --- |
+| Default | Modal decision layer with trapped focus. |
+
+## Do's and Don'ts
+
+### Do's
+
+- Keep title, description, and actions explicit.
+
+### Don'ts
+
+- Don't use dialog for low-priority passive information.
+
+## Usage
+
+```jsx
+<Dialog>
+  <DialogTrigger>Delete</DialogTrigger>
+</Dialog>
+```
+
+## Props
+
+<ArgTypes of={Stories} />
