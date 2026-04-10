@@ -8,9 +8,22 @@ type TooltipStoryArgs = {
   content: string
 }
 
+function TooltipStory({ triggerLabel, content }: TooltipStoryArgs) {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost">{triggerLabel}</Button>
+        </TooltipTrigger>
+        <TooltipContent>{content}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}
+
 const meta = {
   title: 'Overlays/Tooltip',
-  component: Tooltip,
+  component: TooltipStory,
   tags: ['test'],
   args: {
     triggerLabel: 'Tooltip',
@@ -24,20 +37,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Tooltip explica affordances rapidamente em hover ou foco.' } },
   },
-} satisfies Meta<TooltipStoryArgs>
+} satisfies Meta<typeof TooltipStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ triggerLabel, content }) => (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost">{triggerLabel}</Button>
-        </TooltipTrigger>
-        <TooltipContent>{content}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  ),
-}
+export const Playground: Story = {}

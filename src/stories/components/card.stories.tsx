@@ -8,9 +8,23 @@ type CardStoryArgs = {
   body: string
 }
 
+function CardStory({ title, description, body }: CardStoryArgs) {
+  return (
+    <Card className="w-[360px]">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>{body}</p>
+      </CardContent>
+    </Card>
+  )
+}
+
 const meta = {
   title: 'Layout/Card',
-  component: Card,
+  component: CardStory,
   tags: ['test'],
   args: {
     title: 'Operational summary',
@@ -26,21 +40,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Card base renderizado sozinho no canvas, com conteúdo controlado por args.' } },
   },
-} satisfies Meta<CardStoryArgs>
+} satisfies Meta<typeof CardStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ title, description, body }) => (
-    <Card className="w-[360px]">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>{body}</p>
-      </CardContent>
-    </Card>
-  ),
-}
+export const Playground: Story = {}

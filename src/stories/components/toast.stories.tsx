@@ -9,9 +9,25 @@ type ToastStoryArgs = {
   tone: 'success' | 'error'
 }
 
+function ToastStory({ triggerLabel, message, tone }: ToastStoryArgs) {
+  const handleClick = () => {
+    if (tone === 'success') {
+      toast.success(message)
+    } else {
+      toast.error(message)
+    }
+  }
+
+  return (
+    <Button variant="secondary" onClick={handleClick}>
+      {triggerLabel}
+    </Button>
+  )
+}
+
 const meta = {
   title: 'Overlays/Toast',
-  component: Button,
+  component: ToastStory,
   tags: ['test'],
   args: {
     triggerLabel: 'Show toast',
@@ -27,15 +43,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Toast comunica resultados temporários sem interromper o fluxo.' } },
   },
-} satisfies Meta<ToastStoryArgs>
+} satisfies Meta<typeof ToastStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ triggerLabel, message, tone }) => (
-    <Button variant="secondary" onClick={() => tone === 'success' ? toast.success(message) : toast.error(message)}>
-      {triggerLabel}
-    </Button>
-  ),
-}
+export const Playground: Story = {}

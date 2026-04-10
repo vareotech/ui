@@ -10,31 +10,8 @@ type DialogStoryArgs = {
   description: string
 }
 
-const meta = {
-  title: 'Overlays/Dialog',
-  component: Dialog,
-  tags: ['test'],
-  args: {
-    triggerLabel: 'Open dialog',
-    title: 'Dialog title',
-    description: 'Focused decision and short action.',
-  },
-  argTypes: {
-    triggerLabel: { control: 'text' },
-    title: { control: 'text' },
-    description: { control: 'text' },
-  },
-  parameters: {
-    layout: 'fullscreen',
-    docs: { description: { component: 'Dialog protege foco e prioriza decisões pontuais.' } },
-  },
-} satisfies Meta<DialogStoryArgs>
-
-export default meta
-type Story = StoryObj<typeof meta>
-
-export const Playground: Story = {
-  render: ({ triggerLabel, title, description }) => (
+function DialogStory({ triggerLabel, title, description }: DialogStoryArgs) {
+  return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>{triggerLabel}</Button>
@@ -50,19 +27,44 @@ export const Playground: Story = {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  ),
+  )
 }
 
+const meta = {
+  title: 'Overlays/Dialog',
+  component: DialogStory,
+  tags: ['test'],
+  args: {
+    triggerLabel: 'Open dialog',
+    title: 'Dialog title',
+    description: 'Focused decision and short action.',
+  },
+  argTypes: {
+    triggerLabel: { control: 'text' },
+    title: { control: 'text' },
+    description: { control: 'text' },
+  },
+  parameters: {
+    layout: 'fullscreen',
+    docs: { description: { component: 'Dialog protege foco e prioriza decisões pontuais.' } },
+  },
+} satisfies Meta<typeof DialogStory>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Playground: Story = {}
+
 export const Interaction: Story = {
-  render: ({ triggerLabel, title, description }) => (
+  render: (args) => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>{triggerLabel}</Button>
+        <Button>{args.triggerLabel}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogTitle>{args.title}</DialogTitle>
+          <DialogDescription>{args.description}</DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>

@@ -14,7 +14,7 @@ type SelectStoryArgs = {
 
 const meta = {
   title: 'Forms/Select',
-  component: SelectTrigger,
+  component: SelectExample,
   tags: ['test'],
   args: {
     label: 'Segment',
@@ -35,7 +35,7 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Select com trigger e lista compacta. O canvas isola o controle com args previsíveis.' } },
   },
-} satisfies Meta<typeof SelectTrigger>
+} satisfies Meta<typeof SelectExample>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -55,20 +55,16 @@ function SelectExample({ label, placeholder, defaultValue, disabled, invalid, on
   )
 }
 
-export const Playground: Story = {
-  render: (args) => <SelectExample {...args} />,
-}
+export const Playground: Story = {}
 
 export const Invalid: Story = {
   args: {
     invalid: true,
     defaultValue: 'saas',
   },
-  render: (args) => <SelectExample {...args} />,
 }
 
 export const OpenInteraction: Story = {
-  render: (args) => <SelectExample {...args} />,
   play: async ({ canvas, userEvent }) => {
     const trigger = canvas.getByRole('combobox', { name: 'Segment' })
     await userEvent.tab()

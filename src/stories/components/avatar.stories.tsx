@@ -15,9 +15,18 @@ const sizeMap: Record<AvatarStoryArgs['size'], string> = {
   lg: 'size-14',
 }
 
+function AvatarStory({ src, alt, fallback, size }: AvatarStoryArgs) {
+  return (
+    <Avatar className={sizeMap[size]}>
+      {src ? <AvatarImage src={src} alt={alt} /> : null}
+      <AvatarFallback>{fallback}</AvatarFallback>
+    </Avatar>
+  )
+}
+
 const meta = {
   title: 'Data Display/Avatar',
-  component: Avatar,
+  component: AvatarStory,
   tags: ['test'],
   args: {
     src: '',
@@ -35,16 +44,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Avatar isolado com fallback e imagem configuráveis via args.' } },
   },
-} satisfies Meta<AvatarStoryArgs>
+} satisfies Meta<typeof AvatarStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ src, alt, fallback, size }) => (
-    <Avatar className={sizeMap[size]}>
-      {src ? <AvatarImage src={src} alt={alt} /> : null}
-      <AvatarFallback>{fallback}</AvatarFallback>
-    </Avatar>
-  ),
-}
+export const Playground: Story = {}

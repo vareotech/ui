@@ -8,31 +8,8 @@ type BreadcrumbStoryArgs = {
   currentLabel: string
 }
 
-const meta = {
-  title: 'Navigation/Breadcrumb',
-  component: Breadcrumb,
-  tags: ['test'],
-  args: {
-    workspaceLabel: 'Workspace',
-    sectionLabel: 'Pedidos',
-    currentLabel: 'Pedido #10293',
-  },
-  argTypes: {
-    workspaceLabel: { control: 'text' },
-    sectionLabel: { control: 'text' },
-    currentLabel: { control: 'text' },
-  },
-  parameters: {
-    layout: 'fullscreen',
-    docs: { description: { component: 'Breadcrumb aparece isolado com labels configuráveis via args.' } },
-  },
-} satisfies Meta<BreadcrumbStoryArgs>
-
-export default meta
-type Story = StoryObj<typeof meta>
-
-export const Playground: Story = {
-  render: ({ workspaceLabel, sectionLabel, currentLabel }) => (
+function BreadcrumbStory({ workspaceLabel, sectionLabel, currentLabel }: BreadcrumbStoryArgs) {
+  return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
@@ -48,5 +25,30 @@ export const Playground: Story = {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  ),
+  )
 }
+
+const meta = {
+  title: 'Navigation/Breadcrumb',
+  component: BreadcrumbStory,
+  tags: ['test'],
+  args: {
+    workspaceLabel: 'Workspace',
+    sectionLabel: 'Pedidos',
+    currentLabel: 'Pedido #10293',
+  },
+  argTypes: {
+    workspaceLabel: { control: 'text' },
+    sectionLabel: { control: 'text' },
+    currentLabel: { control: 'text' },
+  },
+  parameters: {
+    layout: 'fullscreen',
+    docs: { description: { component: 'Breadcrumb aparece isolado com labels configuráveis via args.' } },
+  },
+} satisfies Meta<typeof BreadcrumbStory>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Playground: Story = {}

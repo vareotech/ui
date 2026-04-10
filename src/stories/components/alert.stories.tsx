@@ -8,9 +8,20 @@ type AlertStoryArgs = {
   description: string
 }
 
+function AlertStory({ variant, title, description }: AlertStoryArgs) {
+  return (
+    <div className="w-[420px]">
+      <Alert variant={variant}>
+        <AlertTitle>{title}</AlertTitle>
+        <AlertDescription>{description}</AlertDescription>
+      </Alert>
+    </div>
+  )
+}
+
 const meta = {
   title: 'Feedback/Alert',
-  component: Alert,
+  component: AlertStory,
   tags: ['test'],
   args: {
     variant: 'default',
@@ -26,18 +37,9 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Alert renderizado sozinho, com variant e conteúdo controlados pelo painel.' } },
   },
-} satisfies Meta<AlertStoryArgs>
+} satisfies Meta<typeof AlertStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ variant, title, description }) => (
-    <div className="w-[420px]">
-      <Alert variant={variant}>
-        <AlertTitle>{title}</AlertTitle>
-        <AlertDescription>{description}</AlertDescription>
-      </Alert>
-    </div>
-  ),
-}
+export const Playground: Story = {}

@@ -9,7 +9,7 @@ type PaginationStoryArgs = {
 
 const meta = {
   title: 'Navigation/Pagination',
-  component: Pagination,
+  component: PaginationExample,
   tags: ['test'],
   args: {
     currentPage: 1,
@@ -21,7 +21,7 @@ const meta = {
     layout: 'fullscreen',
     docs: { description: { component: 'Paginação renderizada sozinha, com página ativa controlável.' } },
   },
-} satisfies Meta<PaginationStoryArgs>
+} satisfies Meta<typeof PaginationExample>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -49,12 +49,9 @@ function PaginationExample({ currentPage }: PaginationStoryArgs) {
   )
 }
 
-export const Playground: Story = {
-  render: (args) => <PaginationExample {...args} />,
-}
+export const Playground: Story = {}
 
 export const KeyboardFocus: Story = {
-  render: (args) => <PaginationExample {...args} />,
   play: async ({ canvas, userEvent }) => {
     await userEvent.tab()
     await expect(canvas.getByRole('button', { name: 'Go to previous page' })).toHaveFocus()
