@@ -7,15 +7,35 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
+      tsconfigPath: './tsconfig.build.json',
       insertTypesEntry: true,
-      include: ['src/**/*.ts', 'src/**/*.tsx'],
-      exclude: ['src/**/*.stories.tsx', 'src/**/*.test.tsx', 'src/App.tsx', 'src/main.tsx', 'src/vite-env.d.ts'],
+      include: [
+        'src/index.ts',
+        'src/components/**/*.ts',
+        'src/components/**/*.tsx',
+        'src/lib/**/*.ts',
+        'src/tokens/**/*.ts',
+      ],
+      exclude: [
+        'src/**/*.stories.tsx',
+        'src/**/*.stories.ts',
+        'src/**/*.test.tsx',
+        'src/**/*.test.ts',
+        'src/stories/**',
+        'src/templates/**',
+        'src/App.tsx',
+        'src/main.tsx',
+        'src/vite-env.d.ts',
+      ],
     }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  css: {
+    /* Ensure the output CSS file is named ui.css */
   },
   build: {
     lib: {
@@ -24,6 +44,7 @@ export default defineConfig({
       formats: ['es', 'umd'],
       fileName: (format) => `index.${format}.js`,
     },
+    cssFileName: 'ui',
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime', 'tailwindcss'],
       output: {
