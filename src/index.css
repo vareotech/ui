@@ -5,35 +5,35 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --background: 222 22% 8%;
-    --foreground: 210 20% 96%;
-    --surface: 222 18% 11%;
-    --surface-muted: 222 16% 14%;
-    --muted: 220 15% 18%;
-    --muted-foreground: 215 14% 70%;
-    --border: 220 14% 22%;
-    --input: 220 14% 18%;
-    --ring: 211 90% 62%;
-    --primary: 210 92% 60%;
-    --primary-foreground: 222 40% 8%;
-    --secondary: 220 14% 18%;
-    --secondary-foreground: 210 20% 96%;
-    --accent: 199 89% 60%;
-    --accent-foreground: 222 40% 8%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --surface: 0 0% 10%;
+    --surface-muted: 0 0% 14%;
+    --muted: 0 0% 7%;
+    --muted-foreground: 0 0% 80%;
+    --border: 0 0% 16%;
+    --input: 0 0% 10%;
+    --ring: 217 100% 62%;
+    --primary: 217 100% 62%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 217 100% 62%;
+    --accent-foreground: 0 0% 4%;
     --success: 146 60% 45%;
     --success-foreground: 210 20% 96%;
     --warning: 39 92% 57%;
     --warning-foreground: 222 40% 8%;
     --destructive: 0 72% 48%;
     --destructive-foreground: 210 20% 96%;
-    --info: 210 92% 60%;
-    --info-foreground: 222 40% 8%;
-    --disabled: 220 10% 28%;
-    --disabled-foreground: 220 10% 58%;
-    --radius: 0.875rem;
-    --shadow-soft: 0 10px 30px rgba(2, 6, 23, 0.24);
-    --shadow-elevated: 0 20px 60px rgba(2, 6, 23, 0.3);
-    --shadow-overlay: 0 24px 80px rgba(2, 6, 23, 0.55);
+    --info: 217 100% 62%;
+    --info-foreground: 0 0% 4%;
+    --disabled: 0 0% 18%;
+    --disabled-foreground: 0 0% 36%;
+    --radius: 0.75rem;
+    --shadow-soft: none;
+    --shadow-elevated: none;
+    --shadow-overlay: none;
     --ease-productive: cubic-bezier(0.2, 0.8, 0.2, 1);
     --motion-fast: 120ms;
     --motion-base: 180ms;
@@ -85,7 +85,7 @@
     font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     min-height: 100vh;
-    background-image: radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 24%), linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%);
+    background-image: radial-gradient(circle at top, rgba(47, 125, 255, 0.1), transparent 28%);
   }
 
   .theme-light body,
@@ -102,23 +102,24 @@
   h3,
   h4 {
     @apply text-foreground;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: -0.04em;
   }
 
   h1 {
-    @apply text-4xl font-semibold tracking-tight sm:text-5xl;
+    @apply text-4xl leading-[1.05] sm:text-6xl lg:text-7xl;
   }
 
   h2 {
-    @apply text-3xl font-semibold tracking-tight;
+    @apply text-3xl leading-[1.1] sm:text-5xl;
   }
 
   h3 {
-    @apply text-2xl font-semibold tracking-tight;
+    @apply text-2xl leading-[1.15] sm:text-[2.5rem];
   }
 
   h4 {
-    @apply text-xl font-medium;
+    @apply text-xl leading-[1.3];
   }
 
   p {
@@ -132,31 +133,31 @@
 
 @layer components {
   .surface {
-    @apply rounded-xl border border-border/90 bg-surface shadow-soft;
+    @apply rounded-lg border border-border bg-surface;
   }
 
   .surface-muted {
-    @apply rounded-xl border border-border/80 bg-surface-muted;
+    @apply rounded-lg border border-border bg-surface-muted;
   }
 
   .surface-elevated {
-    @apply rounded-2xl border border-border/40 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))] shadow-elevated;
+    @apply rounded-lg border border-border bg-surface-muted;
   }
 
   .story-shell {
-    @apply mx-auto w-full max-w-7xl rounded-[28px] border border-border/60 bg-surface/70 p-5 shadow-overlay backdrop-blur md:p-7;
+    @apply mx-auto w-full max-w-7xl rounded-lg border border-border bg-surface p-5 md:p-7;
   }
 
   .story-section {
-    @apply rounded-2xl border border-border/50 bg-surface-muted/80 p-5 shadow-soft md:p-6;
+    @apply rounded-lg border border-border bg-surface-muted p-5 md:p-6;
   }
 
   .story-kicker {
-    @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-primary/90;
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-primary;
   }
 
   .story-title {
-    @apply text-2xl font-semibold tracking-tight text-foreground sm:text-3xl;
+    @apply text-2xl font-bold leading-tight tracking-[-0.04em] text-foreground sm:text-3xl;
   }
 
   .story-subtitle {
@@ -164,7 +165,7 @@
   }
 
   .preview-frame {
-    @apply rounded-2xl border border-border/50 bg-surface-muted/60 p-6 shadow-soft;
+    @apply rounded-lg border border-border bg-surface-muted p-6;
   }
 
   .preview-grid {
@@ -172,7 +173,7 @@
   }
 
   .token-swatch {
-    @apply relative overflow-hidden rounded-xl border border-border/50 shadow-soft;
+    @apply relative overflow-hidden rounded-lg border border-border;
   }
 
   .focus-ring {
@@ -194,7 +195,15 @@
   }
 
   .page-section {
-    @apply py-12 sm:py-16 lg:py-20;
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .stat-callout {
+    @apply text-5xl font-bold leading-none tracking-[-0.04em] text-primary sm:text-6xl;
+  }
+
+  .code-window-card {
+    @apply overflow-hidden rounded-lg border border-border bg-surface p-6 font-mono text-sm leading-6 text-muted-foreground;
   }
 
   .story-empty-grid {

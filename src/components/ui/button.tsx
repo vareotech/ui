@@ -6,15 +6,15 @@ import { LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export const buttonVariants = cva(
-  'focus-ring interactive-scale inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent text-sm font-medium transition-all disabled:pointer-events-none disabled:border-disabled disabled:bg-disabled disabled:text-disabled-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'focus-ring interactive-scale inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent text-sm font-semibold leading-none transition-colors disabled:pointer-events-none disabled:border-disabled disabled:bg-disabled disabled:text-disabled-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-primary-foreground hover:brightness-110',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
-        outline: 'border-border bg-transparent text-foreground hover:bg-surface-muted',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        secondary: 'border-border bg-secondary text-secondary-foreground hover:bg-surface-muted',
+        outline: 'border-border bg-transparent text-foreground hover:bg-surface',
         ghost: 'bg-transparent text-muted-foreground hover:bg-surface-muted hover:text-foreground',
-        destructive: 'bg-destructive text-destructive-foreground hover:brightness-110',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
       },
       size: {
         sm: 'h-9 px-3',

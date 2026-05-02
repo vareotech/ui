@@ -59,11 +59,11 @@ export default {
         },
       },
       borderRadius: {
-        xs: 'calc(var(--radius) - 0.375rem)',
-        sm: 'calc(var(--radius) - 0.25rem)',
-        md: 'calc(var(--radius) - 0.125rem)',
+        xs: '0.25rem',
+        sm: '0.375rem',
+        md: '0.5rem',
         lg: 'var(--radius)',
-        xl: 'calc(var(--radius) + 0.25rem)',
+        xl: 'var(--radius)',
       },
       boxShadow: {
         soft: 'var(--shadow-soft)',

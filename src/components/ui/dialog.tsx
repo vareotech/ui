@@ -25,7 +25,7 @@ const DialogContent = React.forwardRef<
     <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
-      className={cn('fixed left-1/2 top-1/2 z-50 grid w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border bg-surface p-6 shadow-overlay duration-base data-[state=open]:animate-in data-[state=open]:fade-in-0 sm:w-full', className)}
+      className={cn('fixed left-1/2 top-1/2 z-50 grid w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-border bg-surface p-6 duration-base data-[state=open]:animate-in data-[state=open]:fade-in-0 sm:w-full', className)}
       {...props}
     >
       {children}
@@ -50,7 +50,7 @@ const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-foreground', className)} {...props} />
+  <DialogPrimitive.Title ref={ref} className={cn('text-lg font-bold tracking-[-0.02em] text-foreground', className)} {...props} />
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 

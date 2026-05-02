@@ -13,11 +13,11 @@ import {
 } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 
-const sheetVariants = cva('fixed z-50 grid gap-4 bg-surface p-6 shadow-overlay', {
+const sheetVariants = cva('fixed z-50 grid gap-4 bg-surface p-6', {
   variants: {
     side: {
-      top: 'inset-x-0 top-0 border-b rounded-b-2xl',
-      bottom: 'inset-x-0 bottom-0 border-t rounded-t-2xl',
+      top: 'inset-x-0 top-0 border-b rounded-b-lg',
+      bottom: 'inset-x-0 bottom-0 border-t rounded-t-lg',
       left: 'inset-y-0 left-0 h-full w-full max-w-md border-r',
       right: 'inset-y-0 right-0 h-full w-full max-w-md border-l',
     },

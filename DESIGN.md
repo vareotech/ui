@@ -12,6 +12,20 @@ institucional — aparenta, responde e se comporta.
 
 Este documento é a fonte de verdade.
 
+## 2026 marketing surface update
+
+O sistema visual agora segue uma direção **black canvas + electric blue** para superfícies de marketing e produto:
+
+- Canvas padrão quase preto: `--background: 0 0% 4%` (`#0a0a0a`).
+- Cards e mockups escuros: `--surface: 0 0% 10%` e hairline `--border: 0 0% 16%`.
+- A cor de ação única é azul elétrico: `--primary: 217 100% 62%`. Esta cor substitui qualquer referência ao amarelo ClickHouse.
+- Títulos display usam Inter 700 com tracking negativo mais forte (`-0.04em`) para uma presença editorial precisa.
+- Profundidade deve vir de contraste entre canvas/surface/border, não de drop shadows.
+- Ritmo de seção principal: `96px` (`lg:py-24`).
+- Radius principal: `8px` para botões/inputs e `12px` para cards.
+
+As seções históricas abaixo descrevem a origem do sistema, mas as regras acima prevalecem para novos componentes e ajustes visuais.
+
 ---
 
 ## 1. Visual Theme & Atmosphere
