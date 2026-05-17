@@ -1,16 +1,16 @@
 # @vareotech/ui — Design System
 
-> A colônia não tem centro de comando. Cada formiga carrega uma fração do mapa,
-> e o caminho emerge da soma. Este design system funciona da mesma forma:
-> tokens discretos, componentes autônomos, e a coerência nasce do contrato
-> entre eles — não de um supervisor central.
+> A colony has no command centre. Each ant carries a fraction of the map,
+> and the path emerges from the sum. This design system works the same way:
+> discrete tokens, autonomous components, and coherence born from the contract
+> between them — not from a central supervisor.
 
-O `@vareotech/ui` é a fundação visual e de componentes de todo o ecossistema Vareo.
-Ele fornece os **tokens de cor, tipografia, espaçamento, profundidade e motion**
-que definem como qualquer produto da Vareo.tech — do LumoSuite à landing
-institucional — aparenta, responde e se comporta.
+`@vareotech/ui` is the visual and component foundation for every Vareo product.
+It supplies the **colour, typography, spacing, depth, and motion tokens** that
+define how any Vareo surface — from the LumoSuite dashboard to the institutional
+landing page — looks, feels, and behaves.
 
-Este documento é a fonte de verdade.
+This document is the source of truth.
 
 ## 2026 marketing surface update
 
@@ -30,167 +30,273 @@ As seções históricas abaixo descrevem a origem do sistema, mas as regras acim
 
 ## 1. Visual Theme & Atmosphere
 
-### Por quê dark-first
+### Why pure-black-first
 
-Dashboards de varejo são ambientes de trabalho prolongado. O gerente de loja
-verifica pedidos às 22h; o analista de integração monitora filas de
-processamento durante horas. O fundo grafite (`222 22% 8%`) reduz a emissão
-de luz branca sem cair no preto absoluto, que esmaga a percepção de
-profundidade em telas OLED e isola demais os elementos.
+Retail operation software lives on screens that are open all day: a store
+manager checking orders at 10 pm, an analyst watching fulfilment queues for
+hours. The near-pure-black canvas (`#000000`) eliminates ambient light bleed,
+makes hardware OLED panels look their sharpest, and forces all depth
+communication to happen through luminosity stepping and hairline borders —
+the most precise tools available.
 
-O grafite tem um tint azul sutil (hue 222) que mantém a temperatura fria sem
-ser estéril — a mesma linguagem de cor usada por cockpits e control rooms.
+Black is not "flat". The system builds depth through a deliberate stepping
+ladder: `background (#000) → surface (#0a0a0a) → surface-muted (#111) → muted (#171717)`.
+Each rung is 3–4 percentage points lighter — enough to differentiate layers,
+not enough to compete with content.
 
-### Por quê azul + cyan
+### Why Geist
 
-O **Signal Blue** (`210 92% 60%`) é a cor de ação. Vibrante o suficiente
-para saltar do grafite, institucional o suficiente para não parecer jovial.
-Azul é a cor com maior associação universal a confiança e tecnologia.
+Geist is designed for dense interface work. It ships with tabular numerals,
+contextual ligatures, optical size calibration from 10 px to 64 px, and a
+Mono sibling that shares the same skeleton — making code, IDs, and data
+labels feel like part of the same type family. Unlike Inter, Geist was built
+with dark backgrounds in mind: the letter shapes remain open and legible
+even at the smallest dashboard label sizes.
 
-O **Electric Cyan** (`199 89% 60%`) existe como accent — diferente o
-suficiente do primary para criar hierarquia cromática, próximo o suficiente
-para não fragmentar a paleta. Cyan marca dados, destaques e estados ativos
-que não são ação direta.
+Geist Mono is used for overlines, kicker text, metric labels, and anything
+that benefits from fixed-width rhythm — timestamps, status codes, monetary
+values, short identifiers.
 
-### Por quê Inter
+### Why Geist + Space Grotesk (landing only)
 
-Inter Variable é a tipografia de interfaces de alta densidade. Projetada
-especificamente para telas, com x-height generosa, numerais tabulares, e um
-sistema de optical sizes que mantém legibilidade de 11px a 48px. Não é
-decorativa — é infraestrutura.
+The institutional landing needs a display face with more personality than
+Geist alone provides. Space Grotesk brings geometric authority, monolinear
+terminals, and dramatic letter spacing to hero headlines. It is strictly a
+landing-layer addition — it never enters the application product.
 
-### Consumidores podem redefinir a identidade cromática
+### The primary colour is a consumer choice
 
-O sistema é propositalmente agnóstico sobre _qual_ cor o primary deve ser.
-O LumoSuite usa azul. A landing Vareo.tech usa laranja. Ambos sobrescrevem
-`--primary`, `--accent` e `--ring` no `:root` dos seus respectivos CSS.
-**Tudo mais permanece intacto.** Esta é a regra de ouro do theming.
+The system is deliberately agnostic about which hue `--primary` should be.
+LumoSuite uses Signal Blue. The Vareo.tech landing uses Burnt Orange. Both
+override `--primary`, `--primary-foreground`, `--accent`, `--accent-foreground`,
+and `--ring` in their own `:root`. Everything else is inherited intact.
+This is the golden rule of theming.
 
 ---
 
-## 2. Color Palette
+## 2. Colour Palette
 
-Todas as cores são variáveis CSS em formato HSL (sem wrapper `hsl()`),
-consumidas via `hsl(var(--token))`. Cada token tem um nome semântico que
-descreve a função, nunca a aparência.
+All colours are CSS custom properties in HSL format (without the `hsl()` wrapper),
+consumed as `hsl(var(--token))`. Every token carries a semantic name that
+describes function, never appearance.
 
 ### Surfaces & Backgrounds
 
-| Token | HSL | Hex ~aprox | Nome | Papel |
-|:------|:----|:-----------|:-----|:------|
-| `--background` | `222 22% 8%` | `#101318` | Abyss Graphite | Canvas da aplicação. A escuridão que dá contexto a tudo. |
-| `--surface` | `222 18% 11%` | `#161b23` | Control Surface | Cards, painéis, containers elevados — um degrau acima do abismo. |
-| `--surface-muted` | `222 16% 14%` | `#1d222c` | Dim Surface | Hover states, superfícies secundárias, áreas recuadas. |
-| `--muted` | `220 15% 18%` | `#272d37` | Twilight Gray | Backgrounds terciários, divisores visuais entre seções. |
-| `--input` | `220 14% 18%` | `#272d36` | Field Gray | Fundo de inputs e textareas — visualmente distinto do surface. |
-| `--secondary` | `220 14% 18%` | `#272d36` | Quiet Gray | Botões secundários, chips, superfícies de baixa ênfase. |
+| Token | HSL | Hex (approx) | Role |
+|:------|:----|:-------------|:-----|
+| `--background` | `0 0% 0%` | `#000000` | Application canvas. Absolute black — forces every element above it to have presence. |
+| `--surface` | `0 0% 4%` | `#0a0a0a` | Cards, panels, elevated containers — one rung above canvas. |
+| `--surface-muted` | `0 0% 7%` | `#111111` | Hover states, secondary surfaces, recessed areas. |
+| `--muted` | `0 0% 9%` | `#171717` | Tertiary backgrounds, visual dividers between sections. |
+| `--input` | `0 0% 9%` | `#171717` | Input and textarea backgrounds — visually distinct from surface. |
+| `--secondary` | `0 0% 9%` | `#171717` | Secondary buttons, chips, low-emphasis surfaces. |
+| `--border` | `0 0% 10%` | `#1a1a1a` | Hairline borders. Always used with opacity modifiers (`/40` – `/90`). |
 
 ### Text
 
-| Token | HSL | Hex ~aprox | Nome | Papel |
-|:------|:----|:-----------|:-----|:------|
-| `--foreground` | `210 20% 96%` | `#f2f5f8` | Ghost White | Texto primário — off-white para evitar o brilho puro. |
-| `--muted-foreground` | `215 14% 70%` | `#a3acba` | Silver Prose | Texto secundário, descrições, labels, timestamps. |
-| `--secondary-foreground` | `210 20% 96%` | `#f2f5f8` | — | Texto sobre superfícies secondary. |
+| Token | HSL | Hex (approx) | Role |
+|:------|:----|:-------------|:-----|
+| `--foreground` | `210 20% 96%` | `#f2f5f8` | Primary text — off-white to prevent hard contrast fatigue. |
+| `--muted-foreground` | `215 14% 70%` | `#a3acba` | Secondary text: descriptions, labels, timestamps, captions. |
+| `--secondary-foreground` | `210 20% 96%` | `#f2f5f8` | Text on secondary surfaces. |
 
-### Brand & Accent
+### Brand & Accent (default — overridden by consumers)
 
-| Token | HSL | Hex ~aprox | Nome | Papel |
-|:------|:----|:-----------|:-----|:------|
-| `--primary` | `210 92% 60%` | `#3b8cf5` | Signal Blue | A cor de ação. CTAs, links, estados ativos. |
-| `--primary-foreground` | `222 40% 8%` | `#0c1019` | — | Texto sobre primary — grafite escuro para contraste. |
-| `--accent` | `199 89% 60%` | `#29c5e6` | Electric Cyan | Destaques complementares, dados, indicadores. |
-| `--accent-foreground` | `222 40% 8%` | `#0c1019` | — | Texto sobre accent. |
-| `--ring` | `211 90% 62%` | `#4194f5` | Focus Halo | Anel de foco para acessibilidade — sempre visível via teclado. |
+| Token | HSL (default) | Hex (approx) | Role |
+|:------|:--------------|:-------------|:-----|
+| `--primary` | `210 92% 60%` | `#3b8cf5` | Signal Blue — primary action colour. CTAs, active states, links. |
+| `--primary-foreground` | `0 0% 0%` | `#000000` | Text on primary background. Black on blue gives maximum contrast. |
+| `--accent` | `199 89% 60%` | `#29c5e6` | Electric Cyan — complementary highlight for data and indicators. |
+| `--accent-foreground` | `0 0% 0%` | `#000000` | Text on accent background. |
+| `--ring` | `211 90% 62%` | `#4194f5` | Focus halo — always visible via keyboard navigation. |
 
 ### Semantic States
 
-| Token | HSL | Hex ~aprox | Nome | Papel |
-|:------|:----|:-----------|:-----|:------|
-| `--success` | `146 60% 45%` | `#2eb874` | Vibrant Moss | Confirmação, status positivo, saúde do sistema. |
-| `--warning` | `39 92% 57%` | `#e8a631` | Amber Alert | Atenção sem pânico — visibilidade alta em dark mode. |
-| `--destructive` | `0 72% 48%` | `#d4342a` | Pulse Red | Erros, ações irreversíveis, falhas de processamento. |
-| `--info` | `210 92% 60%` | `#3b8cf5` | — | Informação contextual (alias do primary). |
+| Token | HSL | Hex (approx) | Role |
+|:------|:----|:-------------|:-----|
+| `--success` | `146 60% 45%` | `#2eb874` | Confirmation, positive status, system health. |
+| `--warning` | `39 92% 57%` | `#e8a631` | Attention without panic — high visibility on dark backgrounds. |
+| `--destructive` | `0 72% 48%` | `#d4342a` | Errors, irreversible actions, processing failures. |
+| `--info` | `210 92% 60%` | `#3b8cf5` | Contextual information (alias of default primary). |
 
 ### Disabled
 
-| Token | HSL | Papel |
-|:------|:----|:------|
-| `--disabled` | `220 10% 28%` | Background de elementos desabilitados. |
-| `--disabled-foreground` | `220 10% 58%` | Texto em elementos desabilitados. |
+| Token | HSL | Role |
+|:------|:----|:-----|
+| `--disabled` | `0 0% 17%` | Background of disabled elements. |
+| `--disabled-foreground` | `0 0% 40%` | Text inside disabled elements. |
 
 ### Shadows
 
-| Token | Value | Papel |
-|:------|:------|:------|
-| `--shadow-soft` | `0 10px 30px rgba(2,6,23,0.24)` | Elevação padrão — cards, painéis. |
-| `--shadow-elevated` | `0 20px 60px rgba(2,6,23,0.3)` | Modais, popovers, elementos flutuantes. |
-| `--shadow-overlay` | `0 24px 80px rgba(2,6,23,0.55)` | Overlays de tela cheia, toasts críticos. |
+| Token | Value | Role |
+|:------|:------|:-----|
+| `--shadow-soft` | `0 10px 30px rgba(0,0,0,0.40)` | Default elevation — cards, panels. |
+| `--shadow-elevated` | `0 20px 60px rgba(0,0,0,0.55)` | Modals, popovers, floating elements. |
+| `--shadow-overlay` | `0 24px 80px rgba(0,0,0,0.70)` | Full-screen overlays, critical toasts. |
 
-As sombras usam `rgba(2,6,23,...)` — um quase-preto com tint azul — porque
-sombras puras (`rgba(0,0,0,...)`) parecem "sujas" sobre grafite.
+Shadows use pure `rgba(0,0,0,…)` against the near-black canvas. Higher
+opacities are needed precisely because the background is very dark — shadows
+must create true depth separation.
 
 ---
 
 ## 3. Typography
 
-### The Inter Standard
+### The Geist Standard
 
-A Inter é carregada como Variable Font com `font-feature-settings: 'rlig' 1, 'calt' 1`
-para ligaduras contextuais e alternativas estilísticas.
+Geist is loaded from Google Fonts with `font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss02' 1`
+for contextual ligatures and stylistic alternates.
+
+```css
+font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+```
+
+Inter is kept as an immediate fallback since it shares similar metrics,
+preventing layout shifts if Geist fails to load.
+
+### Geist Mono
+
+Used for all data-adjacent text: overlines, metric labels, IDs, timestamps,
+monetary values, status codes. The shared skeleton with Geist means the two
+weights coexist without jarring contrast.
+
+```css
+font-family: "Geist Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+```
 
 ### Hierarchy
 
-| Nível | Tamanho | Peso | Tracking | Line Height | Uso |
-|:------|:--------|:-----|:---------|:------------|:----|
-| **H1** | `text-4xl` / `sm:text-5xl` | Semibold (600) | `-0.02em` | Tight | Títulos de página. |
-| **H2** | `text-3xl` | Semibold (600) | `-0.02em` | Tight | Títulos de seção. |
-| **H3** | `text-2xl` | Semibold (600) | `-0.02em` | Tight | Títulos de card, subsections. |
-| **H4** | `text-xl` | Medium (500) | Normal | Normal | Sub-headings leves. |
-| **Body** | `text-sm` / `sm:text-base` | Regular (400) | Normal | `leading-7` | Parágrafos, descrições. |
-| **Label** | `text-sm` | Medium (500) | Normal | None | Form labels, nav links. |
-| **Micro** | `text-xs` | Medium (500) | `tracking-wide` | Normal | Badges, tags, overlines. |
+| Level | Size | Weight | Tracking | Line Height | Use |
+|:------|:-----|:-------|:---------|:------------|:----|
+| H1 | `text-4xl` / `sm:text-5xl` | Semibold (600) | `−0.025em` | Tight | Page titles |
+| H2 | `text-3xl` | Semibold (600) | `−0.025em` | Tight | Section titles |
+| H3 | `text-2xl` | Semibold (600) | `−0.025em` | Tight | Card titles, sub-sections |
+| H4 | `text-xl` | Medium (500) | Normal | `1.75rem` | Light sub-headings |
+| Body | `text-sm` / `sm:text-base` | Regular (400) | Normal | `leading-7` | Paragraphs, descriptions |
+| Label | `text-sm` | Medium (500) | Normal | — | Form labels, nav links |
+| Micro | `text-xs` | Medium (500) | `tracking-wide` | Normal | Badges, tags, captions |
 
 ### Principles
 
-**Semibold, não Bold.** O peso 600 preserva a abertura dos glifos da Inter
-em telas de densidade média. Bold (700) fecha as contraformas e perde
-legibilidade abaixo de 16px.
+**Semibold, not Bold.** Weight 600 keeps Geist's letter shapes open at
+medium screen densities. Bold (700) closes counters below 16 px and hurts
+legibility in dense tables and lists.
 
-**Tracking negativo nos headings.** `-0.02em` comprime levemente os títulos
-para criar massa visual e autoridade sem aumentar o tamanho da fonte.
+**Negative tracking on headings.** `−0.025em` compresses titles into tight
+visual blocks, adding authority without increasing font size.
 
-**Body em `text-sm` como default.** Em ambientes de alta densidade
-(tabelas, dashboards, listas), 14px (0.875rem) é o tamanho que maximiza
-a quantidade de informação visível sem sacrificar conforto.
+**Body at `text-sm` by default.** In high-density environments (dashboards,
+order lists, data tables), 14 px maximises the amount of visible information
+without sacrificing reading comfort.
 
-**`::selection` em primary/30.** Selecionar texto revela a cor do sistema
-em 30% de opacidade — feedback sutil de que o conteúdo é interativo.
+**`::selection` at `primary/30`.** Selecting text reveals the system colour
+at 30% opacity — a subtle signal that the content is interactive.
 
 ---
 
-## 4. Components
+## 4. Utilities
 
-Todos os componentes são React, usam `class-variance-authority` (cva)
-para variantes, `@radix-ui` para primitivos de acessibilidade, e `cn()`
-(clsx + twMerge) para composição de classes.
+Beyond the standard Tailwind utility classes, `@vareotech/ui` injects a small set
+of semantic utility classes that encode recurring patterns from the product.
+
+### `.eyebrow`
+
+A kicker label — the small text fragment that precedes a section heading and
+provides context before the headline lands.
+
+```css
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: hsl(var(--muted-foreground));
+}
+```
+
+Usage: always paired with either `.eyebrow-dot` or `.live-dot` as its first child.
+
+### `.eyebrow-dot`
+
+Static coloured dot that precedes an eyebrow label.
+
+```css
+.eyebrow-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  flex-shrink: 0;
+}
+```
+
+### `.live-dot`
+
+Animated pulsing dot indicating live data, active connection, or real-time status.
+
+```css
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: hsl(var(--success));
+  animation: live-pulse 1800ms ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+```
+
+Usage: `<span className="live-dot" /> ao vivo` inside `.eyebrow` containers.
+
+### Display Scale
+
+Large display headings for hero sections and major landing moments.
+Intended for use with the Space Grotesk display font (`.heading-display`
+in landing consumers).
+
+| Class | Font Size | Line Height | Letter Spacing |
+|:------|:----------|:------------|:---------------|
+| `.display-xxl` | clamp(3rem, 7vw, 6rem) | 1.0 | −0.04em |
+| `.display-xl` | clamp(2.5rem, 5vw, 4.5rem) | 1.02 | −0.035em |
+| `.display-lg` | clamp(2rem, 4vw, 3.5rem) | 1.05 | −0.03em |
+| `.display-md` | clamp(1.75rem, 3vw, 2.5rem) | 1.08 | −0.025em |
+| `.display-sm` | clamp(1.5rem, 2.5vw, 2rem) | 1.1 | −0.02em |
+
+---
+
+## 5. Components
+
+All components are React, use `class-variance-authority` (CVA) for variants,
+`@radix-ui` for accessible primitives, and `cn()` (clsx + twMerge) for
+class composition.
 
 ### Button
 
-O componente mais usado do sistema. `forwardRef`, com suporte a `asChild`
-(Radix Slot) para composição com links e outras primitivas.
+The most-used component. `forwardRef`, with `asChild` support (Radix Slot)
+for composition with links and other primitives. Pill-shaped by default —
+`rounded-full` across all variants and sizes.
 
 ```tsx
 import { Button, IconButton } from '@vareotech/ui'
 ```
 
-| Prop | Tipo | Default | Descrição |
-|:-----|:-----|:--------|:----------|
-| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | `'primary'` | Estilo visual. |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'icon'` | `'md'` | Dimensão. |
-| `asChild` | `boolean` | `false` | Renderiza como Slot (para `<a>`, `<Link>`, etc.). |
-| `loading` | `boolean` | `false` | Exibe spinner `LoaderCircle` e desabilita. |
-| `disabled` | `boolean` | `false` | Estado desabilitado com tokens `--disabled`. |
+| Prop | Type | Default | Description |
+|:-----|:-----|:--------|:------------|
+| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | `'primary'` | Visual style. |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'icon'` | `'md'` | Dimension. |
+| `asChild` | `boolean` | `false` | Renders as Slot (for `<a>`, `<Link>`, etc.). |
+| `loading` | `boolean` | `false` | Shows `LoaderCircle` spinner and disables. |
+| `disabled` | `boolean` | `false` | Disabled state using `--disabled` tokens. |
 
 **Variant details:**
 
@@ -204,35 +310,35 @@ import { Button, IconButton } from '@vareotech/ui'
 
 **Size details:**
 
-| Size | Height | Padding | Font |
-|:-----|:-------|:--------|:-----|
-| `sm` | `h-9` (36px) | `px-3` | `text-sm` |
-| `md` | `h-10` (40px) | `px-4` | `text-sm` |
-| `lg` | `h-11` (44px) | `px-5` | `text-[15px]` |
-| `icon` | `size-10` (40×40) | — | — |
+| Size | Height | Padding | Font | Shape |
+|:-----|:-------|:--------|:-----|:------|
+| `sm` | `h-9` (36 px) | `px-4` | `text-sm` | `rounded-full` |
+| `md` | `h-10` (40 px) | `px-5` | `text-sm` | `rounded-full` |
+| `lg` | `h-12` (48 px) | `px-6` | `text-[15px]` | `rounded-full` |
+| `icon` | `size-10` (40×40) | — | — | `rounded-full` |
 
-**IconButton** é um wrapper de `Button` com `size="icon"` que exige `aria-label`.
+**IconButton** is a wrapper of `Button` with `size="icon"` that requires `aria-label`.
 
 ### Card Family
 
-Seis function components que compõem a unidade padrão de agrupamento:
+Six function components that compose the standard content grouping unit:
 
 ```tsx
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@vareotech/ui'
 ```
 
-| Component | Classes aplicadas | Nota |
-|:----------|:------------------|:-----|
-| `Card` | `.surface overflow-hidden text-foreground` | Aplica a utility `.surface` (rounded-xl, border, bg-surface, shadow-soft). |
+| Component | Applied Classes | Note |
+|:----------|:----------------|:-----|
+| `Card` | `.surface overflow-hidden text-foreground` | Applies `.surface` utility (rounded-xl, border, bg-surface, shadow-soft). |
 | `CardHeader` | `flex flex-col space-y-1.5 p-6` | — |
-| `CardTitle` | `text-lg font-semibold leading-none tracking-tight` | Renderiza `<h3>`. |
-| `CardDescription` | `text-sm text-muted-foreground` | Renderiza `<p>`. |
-| `CardContent` | `p-6 pt-0` | Sem padding-top para colar no header. |
-| `CardFooter` | `flex items-center p-6 pt-0` | Alinha ações horizontalmente. |
+| `CardTitle` | `text-lg font-semibold leading-none tracking-tight` | Renders `<h3>`. |
+| `CardDescription` | `text-sm text-muted-foreground` | Renders `<p>`. |
+| `CardContent` | `p-6 pt-0` | No top padding — sits flush under the header. |
+| `CardFooter` | `flex items-center p-6 pt-0` | Aligns actions horizontally. |
 
 ### Badge
 
-Indicadores de status e categorias. Sempre `rounded-full`.
+Status indicators and categories. Always `rounded-full`.
 
 ```tsx
 import { Badge } from '@vareotech/ui'
@@ -251,7 +357,7 @@ Base: `px-2.5 py-1 text-xs font-medium tracking-wide`.
 
 ### Input
 
-Campo de entrada. Exporta `inputBaseClassName` para reuso em componentes derivados.
+Entry field. Exports `inputBaseClassName` for reuse in derived components.
 
 ```tsx
 import { Input, inputBaseClassName } from '@vareotech/ui'
@@ -263,21 +369,11 @@ States: `disabled` (cursor not-allowed, bg-disabled/20), `read-only` (bg-surface
 
 ### Textarea
 
-Estende `inputBaseClassName` com `min-h-28 resize-y py-3`.
+Extends `inputBaseClassName` with `min-h-28 resize-y py-3`.
 
-### Label
+### Other Components
 
-Radix `LabelPrimitive` com `text-sm font-medium leading-none text-foreground`.
-Reage a `peer-disabled` (text-disabled-foreground).
-
-### Separator
-
-Radix `SeparatorPrimitive`. Horizontal: `h-px w-full bg-border`.
-Vertical: `h-full w-px bg-border`.
-
-### Full Component Catalog
-
-Além dos componentes acima, o pacote exporta:
+The package also exports:
 
 Accordion · Alert · Avatar · Breadcrumb · Checkbox · DatePicker · Dialog ·
 DropdownMenu · EmptyState · Form · HelperText · LoadingState · Pagination ·
@@ -287,134 +383,128 @@ Footer · ValidationMessage
 
 ---
 
-## 5. Layout
+## 6. Layout
 
 ### Spacing System
 
-A unidade base é **4px** (Tailwind default). Todas as margens, paddings e
-gaps devem ser múltiplos de 4.
+The base unit is **4 px** (Tailwind default). All margins, paddings, and gaps
+must be multiples of 4.
 
-Ritmo primário: `8 → 16 → 20 → 24 → 32 → 48`.
+Primary rhythm: `8 → 16 → 20 → 24 → 32 → 48`.
 
 ### Container Grid
 
-`.container-grid` — a grade padrão para aplicações (dashboards, páginas internas):
+`.container-grid` — the standard grid for applications (dashboards, internal pages):
 
 ```
 mx-auto grid w-full max-w-screen-2xl grid-cols-12 gap-4 px-4 sm:gap-6 sm:px-6 lg:px-8
 ```
 
-12 colunas oferecem divisibilidade máxima (1, 2, 3, 4, 6, 12 colunas),
-essencial para dashboards com painéis de tamanho variável.
+12 columns offer maximum divisibility (1, 2, 3, 4, 6, 12 columns), essential
+for dashboards with panels of varying sizes.
 
 ### Page Section Rhythm
 
-`.page-section` define o respiro vertical entre grandes blocos de conteúdo:
-`py-12 sm:py-16 lg:py-20`. Progressão de 48px → 64px → 80px.
-
-### Container Config
-
-```js
-container: { center: true, padding: '1rem', screens: { '2xl': '1280px' } }
-```
+`.page-section` defines the vertical breathing space between large content blocks:
+`py-12 sm:py-16 lg:py-20`. Progression: 48 px → 64 px → 80 px.
 
 ---
 
-## 6. Depth & Elevation
+## 7. Depth & Elevation
 
-No dark mode, sombras tradicionais são quase invisíveis (escuro sobre escuro).
-A profundidade é comunicada por **três canais simultâneos**:
+On pure-black backgrounds, depth cannot rely on shadows alone (dark on dark).
+The system communicates elevation through three simultaneous channels:
 
-1. **Bordas semi-transparentes** — `border-border/40` a `border-border/90`.
-   A opacidade é o dial: mais opaco = mais proeminente.
-2. **Stepping de luminosidade** — `background → surface → surface-muted → muted`.
-   Cada nível é ~3% mais claro que o anterior.
-3. **Sombras com tint azul** — `rgba(2,6,23,...)` em vez de preto puro.
+1. **Semi-transparent borders** — `border-border/40` to `border-border/90`.
+   Opacity is the dial: more opaque = more prominent.
+2. **Luminosity stepping** — `background → surface → surface-muted → muted`.
+   Each level is ~3% lighter than the previous.
+3. **High-opacity shadows** — `rgba(0,0,0,0.40–0.70)` create physical separation.
 
 ### Elevation Scale
 
-| Level | Utility | Treatment | Uso |
+| Level | Utility | Treatment | Use |
 |:------|:--------|:----------|:----|
-| **0 — Flat** | — | Sem sombra, bg-background | Canvas, texto solto. |
-| **1 — Surface** | `.surface` | `rounded-xl border-border/90 bg-surface shadow-soft` | Cards, painéis, containers. |
-| **1b — Muted** | `.surface-muted` | `rounded-xl border-border/80 bg-surface-muted` | Seções recuadas, hover states. |
-| **2 — Elevated** | `.surface-elevated` | `rounded-2xl border-border/40` + gradient branco 4%→1% + `shadow-elevated` | Modais, popovers, hero cards. |
-| **3 — Overlay** | — | `shadow-overlay` | Toasts, notificações críticas. |
+| **0 — Flat** | — | No shadow, `bg-background` | Canvas, loose text. |
+| **1 — Surface** | `.surface` | `rounded-xl border-border/90 bg-surface shadow-soft` | Cards, panels, containers. |
+| **1b — Muted** | `.surface-muted` | `rounded-xl border-border/80 bg-surface-muted` | Recessed sections, hover states. |
+| **2 — Elevated** | `.surface-elevated` | `rounded-2xl border-border/40` + 4%→1% white gradient + `shadow-elevated` | Modals, popovers, hero cards. |
+| **3 — Overlay** | — | `shadow-overlay` | Full-screen overlays, critical toasts. |
 
 ---
 
-## 7. Motion
+## 8. Motion
 
-O movimento no `@vareotech/ui` é **produtivo** — existe para confirmar ação,
-orientar foco e suavizar transições. Nunca é decorativo.
+Motion in `@vareotech/ui` is **productive** — it exists to confirm actions,
+orient focus, and smooth transitions. Never decorative.
 
 ### Easing
 
 `--ease-productive: cubic-bezier(0.2, 0.8, 0.2, 1)`
 
-Aceleração rápida, desaceleração suave. O elemento "salta" para a posição
-e assenta com naturalidade. Inspirado no Material Design 3, mas com
-desaceleração mais longa para transmitir peso.
+Fast acceleration, soft deceleration. The element jumps to position and
+settles naturally. A longer deceleration than standard Material curves
+communicates weight and physicality.
 
 ### Durations
 
-| Token | Valor | Uso |
+| Token | Value | Use |
 |:------|:------|:----|
-| `--motion-fast` | `120ms` | Hover, active, color transitions. |
+| `--motion-fast` | `120ms` | Hover, active, colour transitions. |
 | `--motion-base` | `180ms` | Dropdowns, tabs, accordions, fade-in. |
-| `--motion-slow` | `240ms` | Expansão de painéis, page transitions. |
+| `--motion-slow` | `240ms` | Panel expansion, page transitions. |
 
-### Animations Built-in
+### Built-in Animations
 
-| Animation | Keyframes | Uso |
+| Animation | Keyframes | Use |
 |:----------|:----------|:----|
-| `accordion-down` | height: 0 → var(--radix-accordion-content-height) | Abertura de accordion. |
-| `accordion-up` | Inverso | Fechamento de accordion. |
-| `fade-in` | opacity 0 + translateY(4px) → visible | Entrada de componentes. |
+| `accordion-down` | height: 0 → var(--radix-accordion-content-height) | Accordion open. |
+| `accordion-up` | Reverse | Accordion close. |
+| `fade-in` | opacity 0 + translateY(4px) → visible | Component entrance. |
+| `live-pulse` | opacity + scale oscillation | Live status dot. |
 
 ---
 
-## 8. Theming
+## 9. Theming
 
-### Como funciona
+### How it works
 
-O sistema é construído sobre **CSS custom properties** consumidas pelo
-Tailwind via `hsl(var(--token))`. Isso permite theming em runtime sem
-recompilação.
+The system is built on **CSS custom properties** consumed by Tailwind via
+`hsl(var(--token))`. This enables runtime theming without recompilation.
 
-- **Dark mode**: Ativo no `:root` (default).
-- **Light mode**: Ativado via classe `.theme-light` no `<html>` ou container.
+- **Dark mode**: Active at `:root` (default — all products are dark-first).
+- **Light mode**: Activated via the `.theme-light` class on `<html>` or a container.
 
-### Contrato de theming para consumidores
+### Consumer theming contract
 
-Consumidores do pacote (landing pages, micro-frontends, tenants do LumoSuite)
-**podem e devem** sobrescrever:
+Consumers (landing pages, micro-frontends, LumoSuite tenants) **may and should**
+override:
 
-| Token | Quando |
+| Token | When |
+|:------|:-----|
+| `--primary` | The consumer's brand colour (blue → orange, green, etc.). |
+| `--primary-foreground` | If the new primary requires a different foreground for contrast. |
+| `--accent` | If the consumer wants an accent distinct from primary. |
+| `--accent-foreground` | Accordingly. |
+| `--ring` | Typically follows primary. |
+
+Consumers **must not** override:
+
+| Token | Reason |
 |:------|:-------|
-| `--primary` | A cor de marca do consumidor (azul → laranja, verde, etc.). |
-| `--primary-foreground` | Se o novo primary exigir foreground diferente. |
-| `--accent` | Se o consumidor quiser um accent diferente do primary. |
-| `--accent-foreground` | Idem. |
-| `--ring` | Normalmente acompanha o primary. |
+| `--background`, `--surface`, `--surface-muted` | These form the calibrated depth hierarchy. |
+| `--border`, `--input`, `--muted` | Alters the perception of borders and fields system-wide. |
+| `--foreground`, `--muted-foreground` | Legibility has been tested for this exact dark theme. |
+| `--radius` | Geometric inconsistency across components. |
+| `--shadow-*` | Misaligns the elevation scale. |
 
-Consumidores **NÃO devem** sobrescrever:
-
-| Token | Motivo |
-|:------|:-------|
-| `--background`, `--surface`, `--surface-muted` | Quebra a hierarquia de profundidade. |
-| `--border`, `--input`, `--muted` | Altera a percepção de bordas e campos. |
-| `--foreground`, `--muted-foreground` | Compromete a legibilidade testada. |
-| `--radius` | Inconsistência geométrica entre componentes. |
-| `--shadow-*` | Desalinha a escala de elevação. |
-
-### Exemplo: landing Vareo.tech
+### Example: Vareo.tech landing
 
 ```css
-/* Apenas brand accent — tudo mais vem do UI */
+/* Only brand accent — everything else comes from the UI package */
 :root {
-  --primary: 24 80% 53%;
-  --primary-foreground: 0 0% 100%;
+  --primary: 24 80% 53%;           /* Burnt Orange */
+  --primary-foreground: 0 0% 100%; /* White (blue used black) */
   --accent: 24 80% 53%;
   --accent-foreground: 0 0% 100%;
   --ring: 24 80% 53%;
@@ -423,75 +513,95 @@ Consumidores **NÃO devem** sobrescrever:
 
 ---
 
-## 9. Do's & Don'ts
+## 10. Do's & Don'ts
 
 ### Do
 
-- **Use os tokens semânticos** (`bg-primary`, `text-muted-foreground`) — nunca hardcode hex.
-- **Use `.surface` para agrupar conteúdo** — garante border, radius e shadow consistentes.
-- **Use `.focus-ring` em interativos custom** — acessibilidade por teclado é obrigatória.
-- **Use `text-balance` em títulos curtos** — evita linhas órfãs.
-- **Use `aria-label` em `IconButton`** — ícones sem texto são invisíveis para screen readers.
-- **Use `asChild` em Button** quando o destino for um `<a>` ou `<Link>`.
-- **Mantenha densidade** — no varejo, ver mais dados é frequentemente melhor que mais whitespace.
+- **Use semantic tokens** (`bg-primary`, `text-muted-foreground`) — never hardcode hex or rgb.
+- **Use `.surface` to group content** — ensures consistent border, radius, and shadow.
+- **Use `.focus-ring` on custom interactives** — keyboard accessibility is required.
+- **Use `.eyebrow` + `.eyebrow-dot` / `.live-dot` for kicker labels** — standard overline pattern.
+- **Use `text-balance` on short titles** — prevents orphan lines.
+- **Use `aria-label` on `IconButton`** — icon-only buttons are invisible to screen readers.
+- **Use `asChild` on Button** when the destination is an `<a>` or `<Link>`.
+- **Maintain density** — in retail software, seeing more data is often better than more whitespace.
+- **Use opacity modifiers on border** — `border-border/40` not `border-border` in most cases.
 
 ### Don't
 
-- **Não use preto puro (`#000`)** — esmaga a profundidade e causa smearing em OLED.
-- **Não use `font-bold` (700) em Inter** — o máximo é `font-semibold` (600). Bold fecha contraformas.
-- **Não crie componentes locais** para o que já existe no pacote.
-- **Não use sombras com preto puro** — use o tint azul do token `--shadow-*`.
-- **Não misture opacity no token e na classe** — use `border-border/50`, não `border-[hsl(var(--border)/0.5)]`.
-- **Não sobrescreva tokens de surface/background** em consumidores — o contrato de profundidade é global.
-- **Não use cores cromáticas arbitrárias** — se não existe como token, não deveria existir na UI.
+- **Do not use saturated off-palette colours** — if it does not exist as a token, it should not exist in the UI.
+- **Do not use `font-bold` (700) in Geist** — max is `font-semibold` (600). Bold closes counters.
+- **Do not build local components** for what already exists in the package.
+- **Do not override surface/background tokens** in consumers — the depth contract is global.
+- **Do not mix inline opacity with token opacity** — use `border-border/50`, not `border-[hsl(var(--border)/0.5)]`.
+- **Do not use high-opacity white overlays** — the near-black theme is destroyed by it.
+- **Do not use decorative motion** — every animation must communicate state change.
 
 ---
 
-## 10. Agent Prompt Guide
+## 11. Agent Prompt Guide
 
-Referência rápida para IAs gerando interfaces com `@vareotech/ui`.
+Quick reference for AI systems generating interfaces with `@vareotech/ui`.
 
-### Color Map (default dark theme)
+### Default Dark Theme Colour Map
 
 ```
-Background:   hsl(222, 22%, 8%)     ← canvas
-Surface:      hsl(222, 18%, 11%)    ← cards
-Primary:      hsl(210, 92%, 60%)    ← ação (azul)
-Accent:       hsl(199, 89%, 60%)    ← destaque (cyan)
-Foreground:   hsl(210, 20%, 96%)    ← texto primário
-Muted-fg:     hsl(215, 14%, 70%)    ← texto secundário
-Border:       hsl(220, 14%, 22%)    ← bordas (com opacity)
-Ring:         hsl(211, 90%, 62%)    ← focus
+Background:      hsl(0, 0%, 0%)       ← pure black canvas
+Surface:         hsl(0, 0%, 4%)       ← #0a0a0a — cards
+Surface-muted:   hsl(0, 0%, 7%)       ← #111111 — recessed areas
+Muted:           hsl(0, 0%, 9%)       ← #171717 — tertiary backgrounds
+Border:          hsl(0, 0%, 10%)      ← #1a1a1a — hairlines (use with /40–/90)
+Foreground:      hsl(210, 20%, 96%)   ← off-white primary text
+Muted-fg:        hsl(215, 14%, 70%)   ← silver secondary text
+Primary:         hsl(210, 92%, 60%)   ← Signal Blue (default — consumer overrides)
+Ring:            hsl(211, 90%, 62%)   ← focus halo
+Success:         hsl(146, 60%, 45%)   ← green
+Warning:         hsl(39, 92%, 57%)    ← amber
+Destructive:     hsl(0, 72%, 48%)     ← red
+```
+
+### Vareo.tech Consumer Override (Burnt Orange)
+
+```
+Primary:              hsl(24, 80%, 53%)   ← #e8772a
+Primary-foreground:   hsl(0, 0%, 100%)   ← white on orange
+Ring:                 hsl(24, 80%, 53%)   ← focus = brand
 ```
 
 ### Component Checklist
 
-- [ ] Ações primárias: `<Button>` (nunca `<button>` nativo).
-- [ ] Agrupamento: `<Card>` + sub-componentes (nunca `<div className="border...">` ad-hoc).
-- [ ] Campos de form: `<Input>`, `<Textarea>`, `<Label>` (nunca `<input>` nativo).
+- [ ] Primary actions: `<Button>` (never native `<button>`).
+- [ ] Content grouping: `<Card>` + sub-components (never ad-hoc `<div className="border …">`).
+- [ ] Form fields: `<Input>`, `<Textarea>`, `<Label>` (never native `<input>`).
 - [ ] Status: `<Badge variant="success|warning|destructive">`.
-- [ ] Acessibilidade: `focus-ring` em todo interativo, `aria-label` em `IconButton`.
+- [ ] Kicker labels: `<span className="eyebrow"><span className="eyebrow-dot" /> Label</span>`.
+- [ ] Live status: `<span className="live-dot" /> ao vivo` inside an `.eyebrow`.
+- [ ] Accessibility: `focus-ring` on every custom interactive, `aria-label` on `IconButton`.
 
 ### Layout Pattern
 
 ```
-Container (.container-grid) → Seção (.page-section) → Card (.surface) → Content
+Container (.container-grid) → Section (.page-section) → Card (.surface) → Content
 ```
 
 ### Gotchas
 
-1. O `--radius` base é `0.875rem` (14px). `rounded-lg` = 14px, `rounded-xl` = 18px.
-2. O `--primary-foreground` é grafite escuro (não branco) — projetado para primary azul.
-   Se o consumidor usar primary mais escuro, deve override o foreground para branco.
-3. Badge `destructive` usa `text-[hsl(0_72%_65%)]` (65% lightness) em vez do token
-   `--destructive` (48%) para legibilidade no dark mode.
-4. Textarea herda `inputBaseClassName` do Input — qualquer mudança no Input afeta o Textarea.
-5. `.surface-elevated` usa `linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.01))`
-   como background — parece sutilmente mais "iluminado" que `.surface`.
+1. `--radius` base is `0.875rem` (14 px). `rounded-lg` = 14 px, `rounded-xl` = 18 px.
+   Buttons are `rounded-full` (pill) — this is intentional and must not be reverted.
+2. `--primary-foreground` is now **pure black** (`0 0% 0%`) in the default theme —
+   designed for the Signal Blue primary. Orange consumers override it to white.
+3. Badge `destructive` uses `text-[hsl(0_72%_65%)]` (65% lightness) instead of
+   the `--destructive` token (48%) for legibility on dark backgrounds.
+4. Textarea inherits `inputBaseClassName` from Input — changes to Input affect Textarea.
+5. `.surface-elevated` uses `linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.01))`
+   as background — it appears subtly more "illuminated" than `.surface`.
+6. Geist Mono is for data labels, not for body text. If you need a mono eyebrow,
+   use `.eyebrow` which already sets the correct family, size, and tracking.
 
 ### Iteration Protocol
 
-1. Se a UI parecer "plana", aumente a opacidade das bordas (`/50` → `/80`).
-2. Se parecer "barulhenta", reduza e use mais `text-muted-foreground`.
-3. Se parecer "desconectada", verifique que os tokens estão sendo usados (não hex/rgb custom).
-4. Se um componente não existir no pacote, questione se deveria existir antes de criar local.
+1. If the UI feels **flat**: increase border opacity (`/50` → `/80`).
+2. If it feels **noisy**: reduce borders and use more `text-muted-foreground`.
+3. If it feels **disconnected**: verify tokens are being used (no hex/rgb custom values).
+4. If a component is **missing from the package**: question whether it should be
+   added before building it locally.

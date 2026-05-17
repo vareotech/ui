@@ -5,35 +5,41 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
-    --surface: 0 0% 10%;
-    --surface-muted: 0 0% 14%;
-    --muted: 0 0% 7%;
-    --muted-foreground: 0 0% 80%;
-    --border: 0 0% 16%;
-    --input: 0 0% 10%;
-    --ring: 217 100% 62%;
-    --primary: 217 100% 62%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --accent: 217 100% 62%;
-    --accent-foreground: 0 0% 4%;
+    /* ── Surfaces (near-pure-black, design-system 2.0) ── */
+    --background: 0 0% 0%;       /* #000000 — canvas */
+    --foreground: 210 20% 96%;   /* #f2f5f8 — off-white */
+    --surface: 0 0% 4%;          /* #0a0a0a — cards, panels */
+    --surface-muted: 0 0% 7%;    /* #111111 — secondary surfaces */
+    --muted: 0 0% 9%;            /* #171717 — tertiary / hover */
+    --muted-foreground: 215 14% 70%; /* #a3acba — secondary text */
+    --border: 0 0% 10%;          /* #1a1a1a — hairline borders */
+    --input: 0 0% 9%;            /* #171717 — input bg */
+    --ring: 211 90% 62%;         /* focus halo */
+    /* ── Brand (overridden by consumers) ── */
+    --primary: 210 92% 60%;      /* Signal Blue — default action */
+    --primary-foreground: 0 0% 0%; /* black text on blue */
+    --secondary: 0 0% 9%;        /* #171717 — quiet surfaces */
+    --secondary-foreground: 210 20% 96%;
+    --accent: 199 89% 60%;       /* Electric Cyan */
+    --accent-foreground: 0 0% 0%;
+    /* ── Semantic states ── */
     --success: 146 60% 45%;
     --success-foreground: 210 20% 96%;
     --warning: 39 92% 57%;
-    --warning-foreground: 222 40% 8%;
+    --warning-foreground: 0 0% 0%;
     --destructive: 0 72% 48%;
     --destructive-foreground: 210 20% 96%;
-    --info: 217 100% 62%;
-    --info-foreground: 0 0% 4%;
-    --disabled: 0 0% 18%;
-    --disabled-foreground: 0 0% 36%;
-    --radius: 0.75rem;
-    --shadow-soft: none;
-    --shadow-elevated: none;
-    --shadow-overlay: none;
+    --info: 210 92% 60%;
+    --info-foreground: 0 0% 0%;
+    --disabled: 0 0% 17%;
+    --disabled-foreground: 0 0% 40%;
+    /* ── Geometry ── */
+    --radius: 0.875rem;
+    /* ── Shadows (pure-black tint) ── */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.40);
+    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.55);
+    --shadow-overlay: 0 24px 80px rgba(0, 0, 0, 0.70);
+    /* ── Motion ── */
     --ease-productive: cubic-bezier(0.2, 0.8, 0.2, 1);
     --motion-fast: 120ms;
     --motion-base: 180ms;
@@ -82,10 +88,10 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss02' 1;
     min-height: 100vh;
-    background-image: radial-gradient(circle at top, rgba(47, 125, 255, 0.1), transparent 28%);
+    /* No body-level gradient — consumers add their own brand layer */
   }
 
   .theme-light body,
@@ -102,24 +108,23 @@
   h3,
   h4 {
     @apply text-foreground;
-    font-weight: 700;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
   }
 
   h1 {
-    @apply text-4xl leading-[1.05] sm:text-6xl lg:text-7xl;
+    @apply text-4xl font-semibold tracking-tight sm:text-5xl;
   }
 
   h2 {
-    @apply text-3xl leading-[1.1] sm:text-5xl;
+    @apply text-3xl font-semibold tracking-tight;
   }
 
   h3 {
-    @apply text-2xl leading-[1.15] sm:text-[2.5rem];
+    @apply text-2xl font-semibold tracking-tight;
   }
 
   h4 {
-    @apply text-xl leading-[1.3];
+    @apply text-xl font-medium;
   }
 
   p {
@@ -133,31 +138,31 @@
 
 @layer components {
   .surface {
-    @apply rounded-lg border border-border bg-surface;
+    @apply rounded-xl border border-border/90 bg-surface shadow-soft;
   }
 
   .surface-muted {
-    @apply rounded-lg border border-border bg-surface-muted;
+    @apply rounded-xl border border-border/80 bg-surface-muted;
   }
 
   .surface-elevated {
-    @apply rounded-lg border border-border bg-surface-muted;
+    @apply rounded-2xl border border-border/40 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))] shadow-elevated;
   }
 
   .story-shell {
-    @apply mx-auto w-full max-w-7xl rounded-lg border border-border bg-surface p-5 md:p-7;
+    @apply mx-auto w-full max-w-7xl rounded-[28px] border border-border/60 bg-surface/70 p-5 shadow-overlay backdrop-blur md:p-7;
   }
 
   .story-section {
-    @apply rounded-lg border border-border bg-surface-muted p-5 md:p-6;
+    @apply rounded-2xl border border-border/50 bg-surface-muted/80 p-5 shadow-soft md:p-6;
   }
 
   .story-kicker {
-    @apply text-xs font-semibold uppercase tracking-[0.12em] text-primary;
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-primary/90;
   }
 
   .story-title {
-    @apply text-2xl font-bold leading-tight tracking-[-0.04em] text-foreground sm:text-3xl;
+    @apply text-2xl font-semibold tracking-tight text-foreground sm:text-3xl;
   }
 
   .story-subtitle {
@@ -165,7 +170,7 @@
   }
 
   .preview-frame {
-    @apply rounded-lg border border-border bg-surface-muted p-6;
+    @apply rounded-2xl border border-border/50 bg-surface-muted/60 p-6 shadow-soft;
   }
 
   .preview-grid {
@@ -173,7 +178,7 @@
   }
 
   .token-swatch {
-    @apply relative overflow-hidden rounded-lg border border-border;
+    @apply relative overflow-hidden rounded-xl border border-border/50 shadow-soft;
   }
 
   .focus-ring {
@@ -195,21 +200,64 @@
   }
 
   .page-section {
-    @apply py-16 sm:py-20 lg:py-24;
-  }
-
-  .stat-callout {
-    @apply text-5xl font-bold leading-none tracking-[-0.04em] text-primary sm:text-6xl;
-  }
-
-  .code-window-card {
-    @apply overflow-hidden rounded-lg border border-border bg-surface p-6 font-mono text-sm leading-6 text-muted-foreground;
+    @apply py-12 sm:py-16 lg:py-20;
   }
 
   .story-empty-grid {
     background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
+  /* ── Eyebrow / mono-caption label ──────────────────────────────
+     Monospaced, uppercase, small — used as section kickers.
+     Canonical pattern: <span class="eyebrow"><span class="eyebrow-dot" /> Label</span>
+     ─────────────────────────────────────────────────────────────── */
+  .eyebrow {
+    font-family: "Geist Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;   /* 11px */
+    line-height: 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .eyebrow-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: hsl(var(--primary));
+    flex-shrink: 0;
+  }
+
+  /* ── Live-dot pulse (online / realtime indicator) ──────────────── */
+  @keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--success) / 0.50); }
+    50%       { box-shadow: 0 0 0 5px hsl(var(--success) / 0); }
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: hsl(var(--success));
+    animation: live-pulse 1800ms ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* ── Display typography scale ──────────────────────────────────
+     Tighter tracking, progressive sizes via clamp().
+     Font weight is always semibold (600) — never bold (700).
+     ─────────────────────────────────────────────────────────────── */
+  .display-xxl { font-size: clamp(2.75rem, 6.5vw, 5.5rem);  font-weight: 600; line-height: 1.02; letter-spacing: -0.035em; }
+  .display-xl  { font-size: clamp(2.5rem,  5.2vw, 4rem);    font-weight: 600; line-height: 1.05; letter-spacing: -0.032em; }
+  .display-lg  { font-size: clamp(2rem,    3.6vw, 3rem);    font-weight: 600; line-height: 1.1;  letter-spacing: -0.026em; }
+  .display-md  { font-size: clamp(1.625rem,2.4vw, 2.25rem); font-weight: 600; line-height: 1.18; letter-spacing: -0.022em; }
+  .display-sm  { font-size: 1.5rem;  font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; }
 }
 
 .sb-show-main,
