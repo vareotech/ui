@@ -41,10 +41,19 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          REGISTRY="https://npm.pkg.github.com"
+
+          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version --registry "${REGISTRY}" >/dev/null 2>&1; then
+            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} already exists in GitHub Packages; skipping publish."
+            exit 0
+          fi
+
           if [[ "${{ github.ref }}" == refs/heads/main ]]; then
-            npm publish --registry https://npm.pkg.github.com --tag latest
+            npm publish --registry "${REGISTRY}" --tag latest
           else
-            npm publish --registry https://npm.pkg.github.com
+            npm publish --registry "${REGISTRY}"
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,10 +66,19 @@ jobs:
 
       - name: Publish to npm
         run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          REGISTRY="https://registry.npmjs.org"
+
+          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version --registry "${REGISTRY}" >/dev/null 2>&1; then
+            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} already exists in npm; skipping publish."
+            exit 0
+          fi
+
           if [[ "${{ github.ref }}" == refs/heads/main ]]; then
-            npm publish --registry https://registry.npmjs.org --access public --tag latest
+            npm publish --registry "${REGISTRY}" --access public --tag latest
           else
-            npm publish --registry https://registry.npmjs.org --access public
+            npm publish --registry "${REGISTRY}" --access public
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
