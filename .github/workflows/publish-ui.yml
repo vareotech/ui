@@ -45,16 +45,6 @@ jobs:
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           REGISTRY="https://npm.pkg.github.com"
 
-          if [[ -z "${NODE_AUTH_TOKEN}" ]]; then
-            echo "GITHUB_PACKAGES_TOKEN is not configured; skipping GitHub Packages publish."
-            exit 0
-          fi
-
-          if ! npm whoami --registry "${REGISTRY}" >/dev/null 2>&1; then
-            echo "GITHUB_PACKAGES_TOKEN cannot authenticate with GitHub Packages; skipping publish."
-            exit 0
-          fi
-
           if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version --registry "${REGISTRY}" >/dev/null 2>&1; then
             echo "${PACKAGE_NAME}@${PACKAGE_VERSION} already exists in GitHub Packages; skipping publish."
             exit 0
@@ -66,19 +56,22 @@ jobs:
             npm publish --registry "${REGISTRY}"
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_PACKAGES_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js for npm
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@vareotech'
 
       - name: Publish to npm
         run: |
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           REGISTRY="https://registry.npmjs.org"
+
+          npm config set @vareotech:registry "${REGISTRY}"
 
           if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version --registry "${REGISTRY}" >/dev/null 2>&1; then
             echo "${PACKAGE_NAME}@${PACKAGE_VERSION} already exists in npm; skipping publish."
