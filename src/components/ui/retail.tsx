@@ -116,7 +116,7 @@ const moduleVariantClasses: Record<
   },
   ledger: {
     root:
-      'flex h-full flex-col rounded-[0.875rem] border-l-4 bg-surface/95 p-0 shadow-[7px_7px_0_hsl(var(--border)/0.75)] after:pointer-events-none after:absolute after:right-0 after:top-0 after:size-6 after:[clip-path:polygon(100%_0,0_0,100%_100%)] hover:-translate-y-1 hover:shadow-[10px_10px_0_hsl(var(--border)/0.7)]',
+      'flex h-full flex-col rounded-[0.875rem] border-l-4 bg-surface/95 p-0 shadow-[0_18px_44px_-34px_rgba(0,0,0,0.34)] after:pointer-events-none after:absolute after:right-0 after:top-0 after:size-6 after:[clip-path:polygon(100%_0,0_0,100%_100%)] hover:-translate-y-1 hover:shadow-[0_22px_52px_-38px_rgba(0,0,0,0.38)]',
     body: 'flex flex-1 flex-col p-6',
     header: 'mb-7',
     title: 'text-lg',
@@ -126,7 +126,7 @@ const moduleVariantClasses: Record<
     showCorner: true,
     usesRail: true,
     headerLayout: 'label-first',
-    label: 'shadow-[2px_2px_0_hsl(var(--border)/0.72)]',
+    label: 'shadow-none',
   },
   soft: {
     root:
@@ -144,7 +144,7 @@ const moduleVariantClasses: Record<
   },
   compact: {
     root:
-      'flex h-full flex-col rounded-[0.75rem] border-l-4 bg-surface/95 p-0 shadow-[5px_5px_0_hsl(var(--border)/0.72)] after:hidden hover:-translate-y-0.5',
+      'flex h-full flex-col rounded-[0.75rem] border-l-4 bg-surface/95 p-0 shadow-[0_16px_36px_-30px_rgba(0,0,0,0.30)] after:hidden hover:-translate-y-0.5',
     body: 'flex flex-1 flex-col p-5',
     header: 'mb-5',
     title: 'text-base',
@@ -154,7 +154,7 @@ const moduleVariantClasses: Record<
     showCorner: false,
     usesRail: true,
     headerLayout: 'label-first',
-    label: 'shadow-[2px_2px_0_hsl(var(--border)/0.72)]',
+    label: 'shadow-none',
   },
 }
 
@@ -176,7 +176,7 @@ function OperationalCard({ className, tone = 'primary', accent = false, ...props
     <div
       data-accent={accent}
       className={cn(
-        'group relative overflow-hidden rounded-[1rem] border border-border/70 bg-surface text-foreground shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[transform,border-color,background-color] duration-base ease-productive data-[accent=true]:border-l-4 hover:-translate-y-0.5 hover:border-primary/45',
+        'group relative overflow-hidden rounded-[1rem] border border-border/70 bg-surface text-foreground shadow-[0_14px_32px_-26px_rgba(0,0,0,0.20)] transition-[transform,border-color,background-color] duration-base ease-productive data-[accent=true]:border-l-4 hover:-translate-y-0.5 hover:border-primary/45',
         toneClasses[tone],
         className,
       )}

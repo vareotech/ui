@@ -22,12 +22,12 @@ customer history, payment status, and repurchase.
 Reusable primitives added for that layer:
 
 - `Button` variants `retail` and `retail-outline`: compact angular geometry,
-  2px borders, dry offset shadow, and perceptible movement in consumers.
+  2px borders, subtle shadow depth, and perceptible movement in consumers.
 - `Badge` stamp variants: `stamp`, `stamp-success`, `stamp-warning`, and
   `stamp-danger` for operational states such as `AGUARDANDO`, `PAGO`,
   `RECOMPRA`, and `ESTOQUE BAIXO`.
 - `OperationalCard`: document-like card with stronger left border, top-right
-  notch, internal structure, and dry offset depth.
+  notch, internal structure, and subtle shadow depth.
 - `MetricCard`, `StepCard`, `ModuleCard`, and `TestimonialCard`: specialized
   retail cards that avoid generic white-card grids.
 
@@ -44,9 +44,9 @@ Recommended retail tokens for consumers:
 | `--warning` | `37 92% 56%` | pending/payment attention |
 | `--success` | `148 68% 34%` | paid/active/positive status |
 
-Depth in this layer should come from offset shadows such as
-`4px 4px 0 hsl(var(--foreground) / 0.12)`, visible dividers, and status rails,
-not from generic blur shadows.
+Depth in this layer should come from clean borders, soft depth shadows, visible
+dividers, and status rails. Avoid hard displaced shadows that read as an extra
+border behind the card.
 
 ## 2026 marketing surface update
 
