@@ -6,11 +6,11 @@ import { Badge } from './badge'
 type OperationalTone = 'primary' | 'success' | 'warning' | 'destructive' | 'neutral'
 
 const toneClasses: Record<OperationalTone, string> = {
-  primary: 'border-l-primary after:border-b-primary/25',
-  success: 'border-l-success after:border-b-success/25',
-  warning: 'border-l-warning after:border-b-warning/30',
-  destructive: 'border-l-destructive after:border-b-destructive/25',
-  neutral: 'border-l-border after:border-b-border/90',
+  primary: 'data-[accent=true]:border-l-primary',
+  success: 'data-[accent=true]:border-l-success',
+  warning: 'data-[accent=true]:border-l-warning',
+  destructive: 'data-[accent=true]:border-l-destructive',
+  neutral: 'data-[accent=true]:border-l-border',
 }
 
 const stampVariant: Record<OperationalTone, React.ComponentProps<typeof Badge>['variant']> = {
@@ -31,13 +31,15 @@ function StatusStamp({ className, tone = 'neutral', ...props }: StatusStampProps
 
 export interface OperationalCardProps extends React.HTMLAttributes<HTMLDivElement> {
   tone?: OperationalTone
+  accent?: boolean
 }
 
-function OperationalCard({ className, tone = 'primary', ...props }: OperationalCardProps) {
+function OperationalCard({ className, tone = 'primary', accent = false, ...props }: OperationalCardProps) {
   return (
     <div
+      data-accent={accent}
       className={cn(
-        'group relative overflow-hidden rounded-[0.625rem] border border-border/70 border-l-[6px] bg-surface text-foreground shadow-[5px_5px_0_hsl(var(--border))] transition-[transform,box-shadow,border-color] duration-base ease-productive after:absolute after:right-0 after:top-0 after:border-b-[18px] after:border-l-[18px] after:border-l-transparent hover:-translate-y-0.5 hover:shadow-[3px_3px_0_hsl(var(--border))]',
+        'group relative overflow-hidden rounded-[1rem] border border-border/70 bg-surface text-foreground shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[transform,border-color,background-color] duration-base ease-productive data-[accent=true]:border-l-4 hover:-translate-y-0.5 hover:border-primary/45',
         toneClasses[tone],
         className,
       )}
@@ -55,15 +57,13 @@ export interface MetricCardProps extends Omit<OperationalCardProps, 'children'> 
 
 function MetricCard({ label, value, description, status, tone = 'primary', className, ...props }: MetricCardProps) {
   return (
-    <OperationalCard tone={tone} className={cn('p-4', className)} {...props}>
+    <OperationalCard tone={tone} className={cn('min-h-36 rounded-[0.875rem] p-5 shadow-none', className)} {...props}>
       <div className="flex items-start justify-between gap-3">
-        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          {label}
-        </p>
+        <p className="text-xs font-semibold leading-snug text-muted-foreground">{label}</p>
         {status ? <StatusStamp tone={tone}>{status}</StatusStamp> : null}
       </div>
-      <p className="mt-4 text-3xl font-semibold text-foreground">{value}</p>
-      {description ? <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p> : null}
+      <p className="mt-3 text-3xl font-semibold leading-none tracking-normal text-primary">{value}</p>
+      {description ? <p className="mt-3 text-xs leading-5 text-muted-foreground">{description}</p> : null}
     </OperationalCard>
   )
 }
@@ -126,19 +126,19 @@ export interface ModuleCardProps extends Omit<OperationalCardProps, 'children'> 
 
 function ModuleCard({ label, title, description, details, icon, preview, tone = 'primary', className, ...props }: ModuleCardProps) {
   return (
-    <OperationalCard tone={tone} className={cn('flex h-full flex-col p-5', className)} {...props}>
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <StatusStamp tone={tone}>{label}</StatusStamp>
+    <OperationalCard tone={tone} className={cn('flex h-full flex-col rounded-[1.125rem] p-6', className)} {...props}>
+      <div className="mb-6 flex items-start justify-between gap-3">
         {icon ? (
-          <span className="flex size-10 items-center justify-center rounded-[0.45rem] border border-border/70 bg-surface-muted text-foreground">
+          <span className="flex size-10 items-center justify-center rounded-[0.7rem] border border-border/70 bg-primary/10 text-primary">
             {icon}
           </span>
         ) : null}
+        <StatusStamp tone={tone} className="shadow-[2px_2px_0_hsl(var(--border)/0.7)]">{label}</StatusStamp>
       </div>
-      <h3 className="text-lg font-semibold leading-tight text-foreground">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
+      <h3 className="text-xl font-semibold leading-tight tracking-normal text-foreground">{title}</h3>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p>
       {details?.length ? (
-        <ul className="mt-5 grid gap-2 border-t border-border/50 pt-4">
+        <ul className="mt-6 grid gap-2 border-t border-border/50 pt-5">
           {details.map((detail) => (
             <li key={detail} className="flex items-start gap-2 text-sm leading-6 text-foreground">
               <span className="mt-2 size-1.5 shrink-0 bg-primary" />
@@ -148,7 +148,7 @@ function ModuleCard({ label, title, description, details, icon, preview, tone = 
         </ul>
       ) : null}
       {preview ? (
-        <div className="mt-auto border border-border/70 bg-surface-muted/60 p-3">
+        <div className="mt-auto border border-border/70 bg-surface-muted/50 p-3">
           {preview}
         </div>
       ) : null}
@@ -165,15 +165,23 @@ export interface TestimonialCardProps extends Omit<OperationalCardProps, 'childr
 
 function TestimonialCard({ label, quote, author, context, tone = 'neutral', className, ...props }: TestimonialCardProps) {
   return (
-    <OperationalCard tone={tone} className={cn('p-6', className)} {...props}>
-      <StatusStamp tone={tone}>{label}</StatusStamp>
-      <blockquote className="mt-5 text-lg font-semibold leading-8 text-foreground">
+    <OperationalCard tone={tone} className={cn('rounded-[1rem] p-7 shadow-none', className)} {...props}>
+      <span className="flex size-9 items-center justify-center rounded-full border border-border/70 bg-background font-mono text-lg leading-none text-foreground" aria-hidden="true">
+        &ldquo;
+      </span>
+      <StatusStamp tone={tone} className="mt-5">{label}</StatusStamp>
+      <blockquote className="mt-5 text-base leading-8 text-foreground">
         {quote}
       </blockquote>
       {author || context ? (
-        <div className="mt-6 border-t border-border/50 pt-4">
-          {author ? <p className="text-sm font-semibold text-foreground">{author}</p> : null}
-          {context ? <p className="mt-1 text-sm leading-6 text-muted-foreground">{context}</p> : null}
+        <div className="mt-6 flex items-center gap-3">
+          <span className="flex size-10 items-center justify-center rounded-full bg-foreground font-mono text-xs font-semibold text-background">
+            {author?.split(' ').map((part) => part[0]).join('').slice(0, 2) || 'VT'}
+          </span>
+          <div>
+            {author ? <p className="text-sm font-semibold text-foreground">{author}</p> : null}
+            {context ? <p className="mt-1 text-sm leading-6 text-muted-foreground">{context}</p> : null}
+          </div>
         </div>
       ) : null}
     </OperationalCard>
