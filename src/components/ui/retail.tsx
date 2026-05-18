@@ -4,7 +4,8 @@ import { cn } from '@/lib/utils'
 import { Badge } from './badge'
 
 export type OperationalTone = 'primary' | 'success' | 'warning' | 'destructive' | 'neutral'
-export type ModuleCardVariant = 'ledger' | 'soft' | 'compact'
+export type ModuleCardVariant = 'showcase' | 'ledger' | 'soft' | 'compact'
+export type ModuleCardHeaderLayout = 'icon-first' | 'label-first'
 export type ModuleCardSlot =
   | 'root'
   | 'body'
@@ -94,8 +95,25 @@ const moduleVariantClasses: Record<
     details: string
     preview: string
     showCorner: boolean
+    usesRail: boolean
+    headerLayout: ModuleCardHeaderLayout
+    label: string
   }
 > = {
+  showcase: {
+    root:
+      'flex h-full flex-col rounded-[1.125rem] bg-surface/90 p-0 shadow-none after:hidden hover:-translate-y-0.5 hover:border-primary/35 hover:bg-surface',
+    body: 'flex flex-1 flex-col p-6',
+    header: 'mb-7',
+    title: 'text-xl',
+    description: 'mt-4',
+    details: 'mt-6 pt-5',
+    preview: 'mt-auto rounded-[0.75rem]',
+    showCorner: false,
+    usesRail: false,
+    headerLayout: 'icon-first',
+    label: 'shadow-none',
+  },
   ledger: {
     root:
       'flex h-full flex-col rounded-[0.875rem] border-l-4 bg-surface/95 p-0 shadow-[7px_7px_0_hsl(var(--border)/0.75)] after:pointer-events-none after:absolute after:right-0 after:top-0 after:size-6 after:[clip-path:polygon(100%_0,0_0,100%_100%)] hover:-translate-y-1 hover:shadow-[10px_10px_0_hsl(var(--border)/0.7)]',
@@ -106,6 +124,9 @@ const moduleVariantClasses: Record<
     details: 'mt-6 pt-5',
     preview: 'mt-auto',
     showCorner: true,
+    usesRail: true,
+    headerLayout: 'label-first',
+    label: 'shadow-[2px_2px_0_hsl(var(--border)/0.72)]',
   },
   soft: {
     root:
@@ -117,6 +138,9 @@ const moduleVariantClasses: Record<
     details: 'mt-6 pt-5',
     preview: 'mt-auto',
     showCorner: false,
+    usesRail: false,
+    headerLayout: 'icon-first',
+    label: 'shadow-none',
   },
   compact: {
     root:
@@ -128,6 +152,9 @@ const moduleVariantClasses: Record<
     details: 'mt-5 pt-4',
     preview: 'mt-6',
     showCorner: false,
+    usesRail: true,
+    headerLayout: 'label-first',
+    label: 'shadow-[2px_2px_0_hsl(var(--border)/0.72)]',
   },
 }
 
@@ -236,6 +263,7 @@ export interface ModuleCardProps extends Omit<OperationalCardProps, 'children'> 
   labelTone?: OperationalTone
   iconTone?: OperationalTone
   showCornerMark?: boolean
+  headerLayout?: ModuleCardHeaderLayout
   classNames?: ModuleCardClassNames
 }
 
@@ -249,8 +277,9 @@ function ModuleCard({
   tone = 'primary',
   labelTone = tone,
   iconTone = tone,
-  variant = 'ledger',
+  variant = 'showcase',
   showCornerMark,
+  headerLayout,
   className,
   classNames,
   ...props
@@ -259,13 +288,30 @@ function ModuleCard({
   const rootTone = moduleToneClasses[tone]
   const iconToneClasses = moduleToneClasses[iconTone]
   const shouldShowCorner = showCornerMark ?? variantClasses.showCorner
+  const resolvedHeaderLayout = headerLayout ?? variantClasses.headerLayout
+  const stamp = (
+    <StatusStamp tone={labelTone} className={cn(variantClasses.label, classNames?.label)}>
+      {label}
+    </StatusStamp>
+  )
+  const iconNode = icon ? (
+    <span
+      className={cn(
+        'flex size-10 items-center justify-center rounded-[0.7rem] border',
+        iconToneClasses.icon,
+        classNames?.icon,
+      )}
+    >
+      {icon}
+    </span>
+  ) : null
 
   return (
     <OperationalCard
       tone={tone}
       className={cn(
         variantClasses.root,
-        rootTone.rail,
+        variantClasses.usesRail ? rootTone.rail : null,
         shouldShowCorner ? rootTone.corner : 'after:hidden',
         className,
         classNames?.root,
@@ -274,20 +320,8 @@ function ModuleCard({
     >
       <div className={cn(variantClasses.body, classNames?.body)}>
         <div className={cn('flex items-start justify-between gap-3', variantClasses.header, classNames?.header)}>
-          <StatusStamp tone={labelTone} className={cn('shadow-[2px_2px_0_hsl(var(--border)/0.72)]', classNames?.label)}>
-            {label}
-          </StatusStamp>
-          {icon ? (
-            <span
-              className={cn(
-                'flex size-10 items-center justify-center rounded-[0.45rem] border',
-                iconToneClasses.icon,
-                classNames?.icon,
-              )}
-            >
-              {icon}
-            </span>
-          ) : null}
+          {resolvedHeaderLayout === 'icon-first' ? iconNode : stamp}
+          {resolvedHeaderLayout === 'icon-first' ? stamp : iconNode}
         </div>
         <h3
           className={cn(

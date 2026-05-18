@@ -52,7 +52,7 @@ function RetailOperationalStory() {
         description="Produto, variante, estoque e link de pagamento entram no mesmo fluxo."
         details={['Link próprio por vendedor', 'Status de estoque visível', 'Produtos sem app para cliente']}
         icon={<Tag className="size-5" />}
-        variant="ledger"
+        variant="showcase"
         labelTone="primary"
         classNames={{ root: 'min-h-80', preview: 'bg-surface-muted/45' }}
       />
