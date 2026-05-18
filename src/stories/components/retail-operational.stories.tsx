@@ -52,6 +52,9 @@ function RetailOperationalStory() {
         description="Produto, variante, estoque e link de pagamento entram no mesmo fluxo."
         details={['Link próprio por vendedor', 'Status de estoque visível', 'Produtos sem app para cliente']}
         icon={<Tag className="size-5" />}
+        variant="ledger"
+        labelTone="primary"
+        classNames={{ root: 'min-h-80', preview: 'bg-surface-muted/45' }}
       />
 
       <ModuleCard
@@ -61,6 +64,8 @@ function RetailOperationalStory() {
         details={['Opt-out registrado', 'Segmentos por compra', 'Mensagem com contexto']}
         icon={<RefreshCcw className="size-5" />}
         tone="success"
+        variant="compact"
+        showCornerMark
       />
 
       <TestimonialCard
