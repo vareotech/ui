@@ -14,6 +14,14 @@ const badgeVariants = cva(
         success: 'border-success/30 bg-success/15 text-success',
         warning: 'border-warning/30 bg-warning/15 text-warning',
         destructive: 'border-destructive/30 bg-destructive/15 text-[hsl(0_72%_65%)]',
+        stamp:
+          'rounded-[0.25rem] border-2 border-foreground/25 bg-surface px-2 py-1 font-mono text-[10px] tracking-[0.16em] text-foreground shadow-[2px_2px_0_hsl(var(--border))]',
+        'stamp-success':
+          'rounded-[0.25rem] border-2 border-success/45 bg-success/10 px-2 py-1 font-mono text-[10px] tracking-[0.16em] text-success shadow-[2px_2px_0_hsl(var(--success)/0.12)]',
+        'stamp-warning':
+          'rounded-[0.25rem] border-2 border-warning/55 bg-warning/10 px-2 py-1 font-mono text-[10px] tracking-[0.16em] text-warning shadow-[2px_2px_0_hsl(var(--warning)/0.14)]',
+        'stamp-danger':
+          'rounded-[0.25rem] border-2 border-destructive/45 bg-destructive/10 px-2 py-1 font-mono text-[10px] tracking-[0.16em] text-destructive shadow-[2px_2px_0_hsl(var(--destructive)/0.12)]',
       },
     },
     defaultVariants: {
@@ -22,7 +30,9 @@ const badgeVariants = cva(
   },
 )
 
-function Badge({ className, variant, ...props }: React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof badgeVariants>) {
+export type BadgeProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof badgeVariants>
+
+function Badge({ className, variant, ...props }: BadgeProps) {
   return <div className={cn(badgeVariants({ variant }), className)} {...props} />
 }
 

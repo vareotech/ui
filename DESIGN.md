@@ -12,6 +12,42 @@ landing page — looks, feels, and behaves.
 
 This document is the source of truth.
 
+## 2026 retail operation layer
+
+The current Vareo.tech landing uses a retail-operation layer on top of the
+shared system. This layer is for surfaces that need to feel like real store
+workflows: WhatsApp conversation, order, receipt, product tag, seller, stock,
+customer history, payment status, and repurchase.
+
+Reusable primitives added for that layer:
+
+- `Button` variants `retail` and `retail-outline`: compact angular geometry,
+  2px borders, dry offset shadow, and perceptible movement in consumers.
+- `Badge` stamp variants: `stamp`, `stamp-success`, `stamp-warning`, and
+  `stamp-danger` for operational states such as `AGUARDANDO`, `PAGO`,
+  `RECOMPRA`, and `ESTOQUE BAIXO`.
+- `OperationalCard`: document-like card with stronger left border, top-right
+  notch, internal structure, and dry offset depth.
+- `MetricCard`, `StepCard`, `ModuleCard`, and `TestimonialCard`: specialized
+  retail cards that avoid generic white-card grids.
+
+Recommended retail tokens for consumers:
+
+| Token | HSL | Role |
+|:------|:----|:-----|
+| `--background` | `45 33% 96%` | warm paper canvas |
+| `--surface` | `0 0% 99%` | document/card surface |
+| `--surface-muted` | `142 18% 91%` | operational row fill |
+| `--foreground` | `170 35% 10%` | strong ink text |
+| `--border` | `160 13% 78%` | visible document line |
+| `--primary` | `148 72% 35%` | WhatsApp/action green |
+| `--warning` | `37 92% 56%` | pending/payment attention |
+| `--success` | `148 68% 34%` | paid/active/positive status |
+
+Depth in this layer should come from offset shadows such as
+`4px 4px 0 hsl(var(--foreground) / 0.12)`, visible dividers, and status rails,
+not from generic blur shadows.
+
 ## 2026 marketing surface update
 
 O sistema visual agora segue uma direção **black canvas + electric blue** para superfícies de marketing e produto:

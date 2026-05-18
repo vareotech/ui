@@ -49,16 +49,24 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+function PlaygroundRender(args: Partial<AvatarStoryArgs>) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.avatar
+
+  return (
+    <AvatarStory
+      src={args.src ?? ''}
+      size={args.size ?? 'md'}
+      alt={args.alt ?? content.alt}
+      fallback={args.fallback ?? content.fallback}
+    />
+  )
+}
+
 export const Playground: Story = {
   args: {
     alt: '',
     fallback: '',
   },
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.avatar
-    const { alt, fallback, ...rest } = args
-
-    return <AvatarStory {...rest} alt={alt ?? content.alt} fallback={fallback ?? content.fallback} />
-  },
+  render: (args) => <PlaygroundRender {...args} />,
 }

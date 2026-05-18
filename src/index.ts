@@ -19,6 +19,7 @@ export * from './components/ui/label';
 export * from './components/ui/loading-state';
 export * from './components/ui/pagination';
 export * from './components/ui/radio-group';
+export * from './components/ui/retail';
 export * from './components/ui/select';
 export * from './components/ui/separator';
 export * from './components/ui/sheet';

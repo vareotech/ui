@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MoreHorizontal, Plus } from 'lucide-react'
 import { expect, fn } from 'storybook/test'
 
-import { Button, IconButton } from '@/components/ui/button'
+import { Button, IconButton, type ButtonProps } from '@/components/ui/button'
 import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 import { useStorybookI18n } from '@/stories/i18n'
 
@@ -19,7 +19,7 @@ const meta = {
   },
   argTypes: {
     children: { control: 'text' },
-    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'destructive'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'ghost', 'destructive', 'retail', 'retail-outline'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
@@ -37,69 +37,95 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.actions
-    const { children, ...rest } = args
+function PlaygroundRender(args: ButtonProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.actions
+  const { children, ...rest } = args
 
-    return <Button {...rest}>{children ?? content.primaryAction}</Button>
-  },
+  return <Button {...rest}>{children ?? content.primaryAction}</Button>
+}
+
+function DestructiveRender(args: ButtonProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.actions
+
+  return <Button {...args}>{content.deleteItem}</Button>
+}
+
+function IconOnlyRender(args: ButtonProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.actions
+  const { 'aria-label': ariaLabel, ...rest } = args
+
+  return (
+    <IconButton {...rest} aria-label={ariaLabel ?? content.moreActions}>
+      <MoreHorizontal />
+    </IconButton>
+  )
+}
+
+function WithLeadingIconRender(args: ButtonProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.actions
+  const { children, ...rest } = args
+
+  return (
+    <Button {...rest}>
+      <Plus />
+      {children ?? content.primaryAction}
+    </Button>
+  )
+}
+
+function InteractionRender(args: ButtonProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.actions
+  const { children, ...rest } = args
+
+  return <Button {...rest}>{children ?? content.interactionAction}</Button>
+}
+
+export const Playground: Story = {
+  render: (args) => <PlaygroundRender {...args} />,
 }
 
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
   },
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.actions
-
-    return <Button {...args}>{content.deleteItem}</Button>
-  },
+  render: (args) => <DestructiveRender {...args} />,
 }
 
 export const IconOnly: Story = {
   args: {
     variant: 'ghost',
   },
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.actions
-    const { 'aria-label': ariaLabel, ...rest } = args
-
-    return (
-      <IconButton {...rest} aria-label={ariaLabel ?? content.moreActions}>
-        <MoreHorizontal />
-      </IconButton>
-    )
-  },
+  render: (args) => <IconOnlyRender {...args} />,
 }
 
 export const WithLeadingIcon: Story = {
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.actions
-    const { children, ...rest } = args
+  render: (args) => <WithLeadingIconRender {...args} />,
+}
 
-    return (
-      <Button {...rest}>
-        <Plus />
-        {children ?? content.primaryAction}
-      </Button>
-    )
+export const RetailAction: Story = {
+  args: {
+    variant: 'retail',
+    size: 'lg',
+    children: 'Começar teste grátis',
+  },
+}
+
+export const RetailOutline: Story = {
+  args: {
+    variant: 'retail-outline',
+    size: 'lg',
+    children: 'Ver como funciona',
   },
 }
 
 export const Interaction: Story = {
   args: { variant: 'primary' },
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.actions
-    const { children, ...rest } = args
-
-    return <Button {...rest}>{children ?? content.interactionAction}</Button>
-  },
+  render: (args) => <InteractionRender {...args} />,
   play: async ({ canvas, userEvent, args }) => {
     const button = canvas.getByRole('button')
     await userEvent.tab()

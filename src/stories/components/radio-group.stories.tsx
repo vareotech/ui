@@ -30,40 +30,28 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: ({ defaultValue, onValueChange }) => {
-    const { messages } = useStorybookI18n()
-    const planOptions = messages.docs.stories.forms.planOptions
+function PlanRadioGroup({ defaultValue = 'growth', onValueChange, withAriaLabel = false }: Partial<RadioGroupStoryArgs> & { withAriaLabel?: boolean }) {
+  const { messages } = useStorybookI18n()
+  const planOptions = messages.docs.stories.forms.planOptions
 
-    return (
-      <RadioGroup defaultValue={defaultValue} onValueChange={onValueChange} className="w-[220px]">
-        {planOptions.map(({ value, label }) => (
-          <label key={value} className="flex items-center gap-3">
-            <RadioGroupItem value={value} />
-            {label}
-          </label>
-        ))}
-      </RadioGroup>
-    )
-  },
+  return (
+    <RadioGroup defaultValue={defaultValue} onValueChange={onValueChange} className="w-[220px]">
+      {planOptions.map(({ value, label }) => (
+        <label key={value} className="flex items-center gap-3">
+          <RadioGroupItem value={value} aria-label={withAriaLabel ? label : undefined} />
+          {label}
+        </label>
+      ))}
+    </RadioGroup>
+  )
+}
+
+export const Playground: Story = {
+  render: (args) => <PlanRadioGroup {...args} />,
 }
 
 export const Interaction: Story = {
-  render: ({ defaultValue, onValueChange }) => {
-    const { messages } = useStorybookI18n()
-    const planOptions = messages.docs.stories.forms.planOptions
-
-    return (
-      <RadioGroup defaultValue={defaultValue} onValueChange={onValueChange} className="w-[220px]">
-        {planOptions.map(({ value, label }) => (
-          <label key={value} className="flex items-center gap-3">
-            <RadioGroupItem value={value} aria-label={label} />
-            {label}
-          </label>
-        ))}
-      </RadioGroup>
-    )
-  },
+  render: (args) => <PlanRadioGroup {...args} withAriaLabel />,
   play: async ({ canvas, userEvent, args }) => {
     const radios = canvas.getAllByRole('radio')
     const starterRadio = radios.find((radio) => radio.getAttribute('value') === 'starter')

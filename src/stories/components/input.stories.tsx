@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type * as React from 'react'
 import { expect, fn } from 'storybook/test'
 
 import { Input } from '@/components/ui/input'
@@ -33,22 +34,39 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+type InputStoryArgs = React.ComponentProps<typeof Input>
+
+function PlaygroundRender(args: InputStoryArgs) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.input
+  const { placeholder, 'aria-label': ariaLabel, ...rest } = args
+
+  return (
+    <Input
+      className="w-[320px]"
+      {...rest}
+      placeholder={placeholder ?? content.defaultPlaceholder}
+      aria-label={ariaLabel ?? content.defaultAriaLabel}
+    />
+  )
+}
+
+function TypingInteractionRender(args: InputStoryArgs) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.input
+  const { placeholder, 'aria-label': ariaLabel, ...rest } = args
+
+  return (
+    <Input
+      {...rest}
+      placeholder={placeholder ?? content.searchPlaceholder}
+      aria-label={ariaLabel ?? content.searchAriaLabel}
+    />
+  )
+}
 
 export const Playground: Story = {
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.input
-    const { placeholder, 'aria-label': ariaLabel, ...rest } = args
-
-    return (
-      <Input
-        className="w-[320px]"
-        {...rest}
-        placeholder={placeholder ?? content.defaultPlaceholder}
-        aria-label={ariaLabel ?? content.defaultAriaLabel}
-      />
-    )
-  },
+  render: (args) => <PlaygroundRender {...args} />,
 }
 
 export const Invalid: Story = {
@@ -60,19 +78,7 @@ export const Invalid: Story = {
 
 export const TypingInteraction: Story = {
   args: {},
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.input
-    const { placeholder, 'aria-label': ariaLabel, ...rest } = args
-
-    return (
-      <Input
-        {...rest}
-        placeholder={placeholder ?? content.searchPlaceholder}
-        aria-label={ariaLabel ?? content.searchAriaLabel}
-      />
-    )
-  },
+  render: (args) => <TypingInteractionRender {...args} />,
   play: async ({ canvas, userEvent, args }) => {
     const input = canvas.getByRole('textbox')
     await userEvent.type(input, 'vareo')

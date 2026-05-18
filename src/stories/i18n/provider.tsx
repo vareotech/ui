@@ -60,12 +60,8 @@ function getValueByPath(messages: Messages, key: string) {
 }
 
 export function StorybookI18nProvider({ children, locale }: { children: ReactNode; locale?: string }) {
-  const [currentLocale, setCurrentLocale] = useState<StorybookLocale>(() => normalizeLocale(locale ?? getPreferredLocale()))
-
-  useEffect(() => {
-    if (!locale) return
-    setCurrentLocale(normalizeLocale(locale))
-  }, [locale])
+  const [storedLocale, setStoredLocale] = useState<StorybookLocale>(() => normalizeLocale(locale ?? getPreferredLocale()))
+  const currentLocale = locale ? normalizeLocale(locale) : storedLocale
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -77,7 +73,7 @@ export function StorybookI18nProvider({ children, locale }: { children: ReactNod
 
     return {
       locale: currentLocale,
-      setLocale: setCurrentLocale,
+      setLocale: setStoredLocale,
       messages,
       t: (key) => {
         const translated = getValueByPath(messages, key)

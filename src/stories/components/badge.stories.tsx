@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Badge } from '@/components/ui/badge'
+import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { StoryDocsDescription } from '@/stories/_internal/docs-helpers'
 import { useStorybookI18n } from '@/stories/i18n'
 
@@ -13,7 +13,10 @@ const meta = {
   },
   argTypes: {
     children: { control: 'text' },
-    variant: { control: 'select', options: ['primary', 'secondary', 'outline', 'success', 'warning', 'destructive'] },
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'success', 'warning', 'destructive', 'stamp', 'stamp-success', 'stamp-warning', 'stamp-danger'],
+    },
   },
   parameters: {
     layout: 'fullscreen',
@@ -24,12 +27,25 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground: Story = {
-  render: (args) => {
-    const { messages } = useStorybookI18n()
-    const content = messages.docs.stories.badge
-    const { children, ...rest } = args
+function PlaygroundRender(args: BadgeProps) {
+  const { messages } = useStorybookI18n()
+  const content = messages.docs.stories.badge
+  const { children, ...rest } = args
 
-    return <Badge {...rest}>{children ?? content.primaryLabel}</Badge>
-  },
+  return <Badge {...rest}>{children ?? content.primaryLabel}</Badge>
+}
+
+export const Playground: Story = {
+  render: (args) => <PlaygroundRender {...args} />,
+}
+
+export const OperationalStamps: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3">
+      <Badge variant="stamp-warning">AGUARDANDO</Badge>
+      <Badge variant="stamp-success">PAGO</Badge>
+      <Badge variant="stamp">CLIENTE VIP</Badge>
+      <Badge variant="stamp-danger">ESTOQUE BAIXO</Badge>
+    </div>
+  ),
 }

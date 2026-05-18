@@ -6,16 +6,19 @@ import { LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export const buttonVariants = cva(
-  // rounded-full → pill shape (design system 2.0)
-  'focus-ring interactive-scale inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent text-sm font-medium transition-all disabled:pointer-events-none disabled:border-disabled disabled:bg-disabled disabled:text-disabled-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'focus-ring interactive-scale inline-flex items-center justify-center gap-2 whitespace-nowrap border border-transparent text-sm font-medium transition-all disabled:pointer-events-none disabled:border-disabled disabled:bg-disabled disabled:text-disabled-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-primary-foreground hover:brightness-110',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
-        outline: 'border-border bg-transparent text-foreground hover:bg-surface-muted',
-        ghost: 'bg-transparent text-muted-foreground hover:bg-surface-muted hover:text-foreground',
-        destructive: 'bg-destructive text-destructive-foreground hover:brightness-110',
+        primary: 'rounded-full bg-primary text-primary-foreground hover:brightness-110',
+        secondary: 'rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90',
+        outline: 'rounded-full border-border bg-transparent text-foreground hover:bg-surface-muted',
+        ghost: 'rounded-full bg-transparent text-muted-foreground hover:bg-surface-muted hover:text-foreground',
+        destructive: 'rounded-full bg-destructive text-destructive-foreground hover:brightness-110',
+        retail:
+          'rounded-[0.625rem] border-2 border-primary bg-primary text-primary-foreground shadow-[4px_4px_0_hsl(var(--foreground)/0.14)] hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[2px_2px_0_hsl(var(--foreground)/0.18)]',
+        'retail-outline':
+          'rounded-[0.625rem] border-2 border-foreground/20 bg-surface text-foreground shadow-[3px_3px_0_hsl(var(--border))] hover:-translate-y-0.5 hover:border-primary hover:text-primary hover:shadow-[2px_2px_0_hsl(var(--primary)/0.2)]',
       },
       size: {
         sm: 'h-9 px-4',
